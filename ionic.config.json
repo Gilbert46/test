@@ -1,0 +1,7 @@
+{
+  "name": "puzzlepop",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
