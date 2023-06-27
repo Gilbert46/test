@@ -1,0 +1,13 @@
+<div [hidden]="!hidden">
+  <ion-app >
+    <ion-router-outlet></ion-router-outlet>
+  </ion-app>
+</div>
+<div [hidden]="hidden">
+  <div class="slash">
+    <div class="col">
+      <div class="time" *ngFor="let t of time" [ngClass]="{'process': !t}"></div>
+    </div>
+    <br/><h1>cargando...</h1>
+  </div>
+</div>

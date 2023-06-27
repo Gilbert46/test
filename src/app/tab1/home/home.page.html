@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Hola {{ user.name }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-input type="button" (click)="optionMenu(1)" value="Mis Puzzles"></ion-input>
+  <ion-input type="button" (click)="optionMenu(2)" value="Nuevo Puzzle"></ion-input>
+  <ion-input type="button" (click)="optionMenu(4)" value="Datos personales"></ion-input>
+  <ion-buttons class="exit">
+    <ion-button type="button" (click)="LogOut()"><ion-icon aria-hidden="true" size="large" color="danger" name="close-circle-outline"></ion-icon></ion-button>
+  </ion-buttons>
+  <br/><br/>
+  <!--
+  <ion-input type="button" (click)="optionMenu(3)" value="Estadísticas"></ion-input>
+  <ion-input type="button" (click)="LogOut()" value="Salir del Log"></ion-input>-->
+  <!--<capacitor-google-map id="map"></capacitor-google-map>-->
+  <iframe  id="map" src="" allowfullscreen></iframe>
+</ion-content>

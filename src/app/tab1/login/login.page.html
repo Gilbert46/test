@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Entrar/Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+	<form [formGroup]="credentials" (ngSubmit)="login()">
+    <ion-input fill="solid" type="email" placeholder="entrar correo electrónico" formControlName="email" [ngClass]="{'ion-invalid': credentials.controls['email'].invalid}"></ion-input>
+    <div *ngIf="credentials.controls['email'].invalid"><ion-note>Email no es valido</ion-note></div>
+    <ion-input fill="solid" type="password" placeholder="entrar contraseña" formControlName="password" [ngClass]="{'ion-invalid': credentials.controls['password'].invalid}"></ion-input>
+    <div *ngIf="credentials.controls['password'].invalid"><ion-note>Password necesitas mínimo 6 carácteres</ion-note></div>
+    <div [hidden]="!isLog[0]">
+      <ion-input fill="solid" type="text" placeholder="entrar nombre completo" formControlName="name" [ngClass]="{'ion-invalid': !credentials.controls['name'].valid}"></ion-input>
+      <div *ngIf="!credentials.controls['name'].valid"><ion-note>Nombre es obligatorio</ion-note></div>
+      <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" [ngClass]="{'ion-invalid': !credentials.controls['adrece'].valid}"></ion-input>
+      <div *ngIf="!credentials.controls['adrece'].valid"><ion-note>Dirección es obligatoria</ion-note></div>
+      <ion-input fill="solid" type="number" placeholder="entrar teléfono" formControlName="phone" [ngClass]="{'ion-invalid': !credentials.controls['phone'].valid}"></ion-input>
+      <div *ngIf="!credentials.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>
+    </div>
+    <br/><br/>
+    <div [hidden]="isLog[0]">
+      <ion-button type="submit" [disabled]="!credentials.valid">Entrar</ion-button>
+    </div>
+		<div [hidden]="!isLog[0]">
+      <ion-button type="button" [disabled]="!credentials.valid" (click)="register()">Registrarse</ion-button>
+    </div>
+	</form>
+  <br/><br/>
+  <ion-text (click)="setIsLog(!isLog[0])">{{  msgAction }}</ion-text>
+  <br/><br/>
+  <div *ngIf="isLog[1]">
+    <ion-note>Usuario no válido, alguno de los campos no es correcto</ion-note>
+  </div>
+</ion-content>

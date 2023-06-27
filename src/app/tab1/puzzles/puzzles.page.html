@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mis puzzles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div [hidden]="flag[0]">
+    <div class="search">
+      <div class="buttons">
+        <ion-buttons class="flex">
+          <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" name="play-back-outline"></ion-icon></ion-button>
+          <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" name="play-forward-outline"></ion-icon></ion-button>
+          <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </div>
+      <br/>
+      <div class="select">
+        <select id="numberPice" (change)="getSearchValue()">
+          <option value="99999999"> buscar por piezas</option>
+          <option value="2500"> entre 2000 y 2500 u</option>
+          <option value="2000"> entre 1500 y 2000 u</option>
+          <option value="1500"> entre 1000 y 1500 u</option>
+          <option value="1000"> enntre 500 y 1000 u</option>
+          <option value="500"> hasta 500 u</option>
+        </select>
+        <select id="pricePice" (change)="getSearchValue()">
+          <option value="99999999">  buscar por precio</option>
+          <option value="50"> hasta 50 €</option>
+          <option value="40"> hasta 40 €</option>
+          <option value="30"> hasta 30 €</option>
+          <option value="20"> hasta 20 €</option>
+          <option value="10"> hasta 10 €</option>
+        </select>
+      </div>
+      <div class="title">
+        <ion-input type="text" id="searchTitle" placeholder="buscar el titulo del puzzle..." (keyup)="getSearchValue()"></ion-input>
+      </div>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="{{ columne }}" *ngFor="let p of puzzles; index as position">
+          <div class="march">
+            <ion-img [src]="p.filepath"></ion-img>
+            <h3>{{ p.titulo }}</h3>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-title *ngIf="puzzles.length <= 0">No se han encontrado puzzles</ion-title>
+  </div>
+</ion-content>

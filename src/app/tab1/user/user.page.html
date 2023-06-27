@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Datos personales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="search">
+    <div class="buttons">
+      <ion-buttons class="flex">
+        <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" name="play-back-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" name="play-forward-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
+      </ion-buttons>
+    </div>
+    <form [formGroup]="userForm" (ngSubmit)="update()">
+      <ion-input fill="solid" type="email" placeholder="entrar correo electrónico"  formControlName="email" [disabled]="true"></ion-input>
+      <ion-input fill="solid" type="text" placeholder="entrar nombre completo" formControlName="name" [ngClass]="{'ion-invalid': !userForm.controls['name'].valid}"></ion-input>
+      <div *ngIf="!userForm.controls['name'].valid"><ion-note>Nombre  necesitas mínimo 5 carácteres</ion-note></div>
+      <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" [ngClass]="{'ion-invalid': !userForm.controls['adrece'].valid}"></ion-input>
+      <div *ngIf="!userForm.controls['adrece'].valid"><ion-note>Dirección  necesitas mínimo 6 carácteres</ion-note></div>
+      <ion-input fill="solid" type="number" placeholder="entrar teléfono" formControlName="phone" [ngClass]="{'ion-invalid': !userForm.controls['phone'].valid}"></ion-input>
+      <div *ngIf="!userForm.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>
+      <ion-input fill="solid" type="password" placeholder="entrar nueva contraseña" formControlName="password" [ngClass]="{'ion-invalid': !userForm.controls['password'].valid}" [disabled]="true" (keyup)="chPw()"></ion-input>
+      <div *ngIf="!userForm.controls['password'].valid"><ion-note>Contraseña necesitas mínimo 5 carácteres</ion-note></div>
+      <ion-input fill="solid" type="password" placeholder="repetir la contraseña" formControlName="password2" [ngClass]="{'ion-invalid': !userForm.controls['password2'].valid}" [disabled]="true" (keyup)="chPw()"></ion-input>
+      <div *ngIf="!userForm.controls['password'].valid"><ion-note>Las dos contraseñas han ser idénticas</ion-note></div>
+      <br/><br/>
+      <div class="buttons">
+        <ion-buttons class="flex">
+          <ion-button type="submit" [disabled]="!userForm.valid"><ion-icon aria-hidden="true" size="large" color="success" name="checkmark-circle-outline"></ion-icon></ion-button>
+          <ion-button type="button" (click)="changePage(2)"><ion-icon aria-hidden="true"  size="large" color="danger" name="close-circle-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </div>
+    </form>
+  </div>
+</ion-content>
