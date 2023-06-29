@@ -20,7 +20,6 @@ export class PhotoService {
       quality: 100
     })
     const savedImageFile = await this.savePicture(capturePhoto);
-
   }
 
   private async savePicture(photo: Photo) {
@@ -29,10 +28,9 @@ export class PhotoService {
     const savedFile = await Filesystem.writeFile({
       path: fileName,
       data: base64Data,
-      directory: Directory.Data
-    });
+      //directory: Directory.Data
+    })
     const upImageFile =  await this.upFileStage(savedFile)
-
   }
 
   private async readAsBase64(photo: Photo) {
@@ -47,22 +45,21 @@ export class PhotoService {
     reader.onload = () => {
         resolve(reader.result);
     };
-
+    reader.readAsDataURL(blob);
   });
 
   private async upFileStage(photo: WriteFileResult) {
-    const storage = getStorage();
+    const storage = getStorage()
     const storageRef = ref(storage, 'some-child')
-    const response = await fetch(photo.uri);
-    const blob = await response.blob();
-    console.log(photo.uri)
+    const response = await fetch(photo.uri)
+    const blob = await response.blob()
     uploadBytes(storageRef, blob).then((snapshot) => {
       this.webViewPath = 'gs://puzzle-21pop.appspot.com/imgpuzlis/'+photo.uri
       console.log(this.webViewPath)
       getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
         this.filepath = url
         console.log(this.filepath)
-      });
-    });
+      })
+    })
   }
 }
