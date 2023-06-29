@@ -24,8 +24,8 @@
       <br/><br/><br/><br/>
       <div class="buttons">
         <ion-buttons class="flex">
-          <ion-button><ion-icon aria-hidden="true" size="large" color="success" name="add-circle"></ion-icon></ion-button>
-          <ion-button><ion-icon aria-hidden="true" size="large" color="danger" name="close-circle"></ion-icon></ion-button>
+          <ion-button type="submit" [disabled]="!puzzleFrom.valid"><ion-icon aria-hidden="true" size="large" color="success" name="add-circle"></ion-icon></ion-button>
+          <ion-button type="button" (click)="changePage(2)"><ion-icon aria-hidden="true" size="large" color="danger" name="close-circle"></ion-icon></ion-button>
         </ion-buttons>
       </div>
     </form>

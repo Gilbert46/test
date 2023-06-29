@@ -16,7 +16,6 @@ export class AuthService {
   async register( usuari: User) {
 		try {
 			const user = await createUserWithEmailAndPassword(this.auth, usuari.email, usuari.password)
-      usuari.uid = String(this.auth)
       this.addUser(usuari)
       this.getIdfield(usuari)
 			return user
@@ -27,7 +26,6 @@ export class AuthService {
 	async login( usuari: User ) {
 		try {
 			const user = await signInWithEmailAndPassword(this.auth, usuari.email, usuari.password)
-      usuari.uid = String(this.auth)
       this.getIdfield(usuari)
 			return user
 		} catch (e) {

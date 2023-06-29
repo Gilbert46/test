@@ -5,6 +5,5 @@ export interface User {
   adrece?: string,
   phone?: string,
   id?: string,
-  uid?: string,
   localitation?: string
 }
