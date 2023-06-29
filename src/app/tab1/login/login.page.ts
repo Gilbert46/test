@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     promise.then(() => {
       setTimeout(() => {
         if (user) {
-          this.router.navigateByUrl('/tab1/home', { replaceUrl: true })
+          this.router.navigateByUrl('/tab1/home/'+this.authService.auth, { replaceUrl: true })
         } else {
           this.isLog[1] = true
           this.showAlert('usuario no válido', 'Alguno de los campos no son correctos')

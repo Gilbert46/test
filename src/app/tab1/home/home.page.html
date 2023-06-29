@@ -9,13 +9,17 @@
   <ion-input type="button" (click)="optionMenu(1)" value="Mis Puzzles"></ion-input>
   <ion-input type="button" (click)="optionMenu(2)" value="Nuevo Puzzle"></ion-input>
   <ion-input type="button" (click)="optionMenu(4)" value="Datos personales"></ion-input>
-  <ion-buttons class="exit">
-    <ion-button type="button" (click)="LogOut()"><ion-icon aria-hidden="true" size="large" color="danger" name="close-circle-outline"></ion-icon></ion-button>
-  </ion-buttons>
+  <div class="exit">
+    <ion-button type="button" (click)="LogOut()"><ion-icon aria-hidden="true" size="large" color="danger" name="close-circle"></ion-icon></ion-button>
+  </div>
   <br/><br/>
   <!--
   <ion-input type="button" (click)="optionMenu(3)" value="Estadísticas"></ion-input>
   <ion-input type="button" (click)="LogOut()" value="Salir del Log"></ion-input>-->
-  <!--<capacitor-google-map id="map"></capacitor-google-map>-->
-  <iframe  id="map" src="" allowfullscreen></iframe>
+
+  <div class="rec">
+    <!--<capacitor-google-map id="map"></capacitor-google-map>-->
+    <iframe  id="map" src="" allowfullscreen></iframe>
+  </div>
+
 </ion-content>

@@ -29,9 +29,9 @@ export class PuzzlesPage implements OnInit {
     this.getSearchValue();
   }
   changePage(n: number): void {
-    if (n == 1) this.router.navigateByUrl('/tab1/user', { replaceUrl: true });
-    else if (n == 2) this.router.navigateByUrl('/tab1/home', { replaceUrl: true });
-    else if (n == 3) this.router.navigateByUrl('/tab1/new', { replaceUrl: true });
+    if (n == 1) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true });
+    else if (n == 2) this.router.navigateByUrl('/tab1/home/'+this.authService.auth, { replaceUrl: true });
+    else if (n == 3) this.router.navigateByUrl('/tab1/new/'+this.authService.auth, { replaceUrl: true });
     else this.location.back();
   }
   getSearchValue(): void {
@@ -49,7 +49,7 @@ export class PuzzlesPage implements OnInit {
     promise.then(() => {
       setTimeout (() => {
         this.sortPuzzle(price, pices, title);
-      }, 100);
+      }, 300);
     });
   }
   sortPuzzle(price: number, pices: number, title: string) {

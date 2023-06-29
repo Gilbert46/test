@@ -15,6 +15,7 @@ export interface Puzzle {
   privado?: boolean,
   comentario?: string,
   userid?: string,
-  localizacion?: string
+  localizacion?: string,
+  id?: string
 }
 

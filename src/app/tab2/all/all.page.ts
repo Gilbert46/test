@@ -3,6 +3,7 @@ import { Puzzle } from '../../interfaces/puzzle';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { PuzzleService } from '../../services/puzzle.service';
 import { AlertController } from '@ionic/angular';
+import { copyFileSync } from 'fs';
 
 @Component({
   selector: 'app-all',
@@ -36,7 +37,7 @@ export class AllPage implements OnInit {
     promise.then(() => {
       setTimeout (() => {
         this.sortPuzzle(price, pices, title);
-      }, 100);
+      }, 300);
     });
   }
   detallPuzzle(idx: number) : void {
@@ -81,11 +82,13 @@ export class AllPage implements OnInit {
       const pathRef = ref(storage, this.puzzle.webviewPath)
       //console.log(pathRef)
       getDownloadURL(ref(pathRef)).then((url) => {
+        let blob: Blob
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'blob';
-        xhr.onload = (event) => {const blob=xhr.response;};
+        xhr.onload = (event) => {blob=xhr.response;};
         xhr.open('GET', url);
-        xhr.send(''+pathRef);
+        xhr.send();
+        //window.location.href = ''+pathRef
         this.showAlert('¡ FELICIDADES !', 'Descarga efectuada correctamente')
       })
       .catch((error) => {
@@ -105,12 +108,10 @@ export class AllPage implements OnInit {
         }
       });
     }
-    if (i == 1) window.location.href = ''+path.filepath.toString();
+    if (i == 1) window.location.href = 'https://web.whatsapp.com/';
     if (i == 2) window.location.href= 'https://www.google.com/intl/es/gmail/about/'
     if (i == 3) window.location.href= 'https://twitter.com/'
-
   }
-
   sortPuzzle(price: number, pices: number, title: string): void {
     for (let i=0; i<this.puzzles.length; i++) {
       if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {

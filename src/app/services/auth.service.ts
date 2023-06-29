@@ -1,4 +1,4 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword,createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Firestore, addDoc, collection, collectionData, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -11,11 +11,12 @@ import { User } from '../interfaces/user';
 })
 export class AuthService {
   idx: string = ''
-  constructor(private auth: Auth, private firestore: Firestore, private router: Router) { }
+  constructor(public auth: Auth, private firestore: Firestore, private router: Router) { }
 
   async register( usuari: User) {
 		try {
 			const user = await createUserWithEmailAndPassword(this.auth, usuari.email, usuari.password)
+      usuari.uid = String(this.auth)
       this.addUser(usuari)
       this.getIdfield(usuari)
 			return user
@@ -26,6 +27,7 @@ export class AuthService {
 	async login( usuari: User ) {
 		try {
 			const user = await signInWithEmailAndPassword(this.auth, usuari.email, usuari.password)
+      usuari.uid = String(this.auth)
       this.getIdfield(usuari)
 			return user
 		} catch (e) {
@@ -46,7 +48,7 @@ export class AuthService {
   }
   getIdfield(user: User) {
     this.getUsers(user).subscribe(res =>{res.forEach(e=>{
-      if (user.email==e.email) this.idx=String(e.id);});});
+      if (user.email==e.email)this.idx=String(e.id);});});
   }
   updateUser(usuari: User) {
     const use =  doc(this.firestore, `users/${usuari.id}`)

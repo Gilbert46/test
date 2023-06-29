@@ -54,10 +54,10 @@ export class Home1Page implements OnInit {
     });*/
   }
   optionMenu(n: number): void {
-    if (n == 1) this.router.navigateByUrl('/tab1/puzzles', { replaceUrl: true })
-    if (n == 2) this.router.navigateByUrl('/tab1/new', { replaceUrl: true })
-    if (n == 3) this.router.navigateByUrl('/tab1/graphic', { replaceUrl: true })
-    if (n == 4) this.router.navigateByUrl('/tab1/user', { replaceUrl: true })
+    if (n == 1) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true })
+    if (n == 2) this.router.navigateByUrl('/tab1/new/'+this.authService.auth, { replaceUrl: true })
+    if (n == 3) this.router.navigateByUrl('/tab1/graphic/'+this.authService.auth, { replaceUrl: true })
+    if (n == 4) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true })
   }
   LogOut(): void {
     this.tabsPage.setBtTab1(false)

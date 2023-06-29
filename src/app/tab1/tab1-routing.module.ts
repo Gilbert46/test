@@ -12,23 +12,23 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'home',
+    path: 'home/:user',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'puzzles',
+    path: 'puzzles/:user',
     loadChildren: () => import('./puzzles/puzzles.module').then( m => m.PuzzlesPageModule)
   },
   {
-    path: 'new',
+    path: 'new/:user',
     loadChildren: () => import('./new/new.module').then( m => m.NewPageModule)
   },
   {
-    path: 'user',
+    path: 'user/:user',
     loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
   },
   {
-    path: 'graphic',
+    path: 'graphic/:user',
     loadChildren: () => import('./graphic/graphic.module').then( m => m.GraphicPageModule)
   }
 ];
