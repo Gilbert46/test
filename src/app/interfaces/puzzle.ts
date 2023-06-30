@@ -6,7 +6,7 @@ export interface Puzzle {
   piezas: number,
   propietario: string,
   filepath: string,
-  webviewPath?: string,
+  webviewPath: string,
   alto?: number,
   ancho?: number,
   año?: number,

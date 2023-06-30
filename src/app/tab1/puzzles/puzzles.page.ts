@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Puzzle } from '../../interfaces/puzzle';
 import { PuzzleService } from '../../services/puzzle.service';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 
 @Component({
@@ -27,6 +28,13 @@ export class PuzzlesPage implements OnInit {
   initUser(): void {
     this.idField = String(this.authService.idx)
     this.getSearchValue();
+  }
+  webViewImage(str: string): String {
+    const storage = getStorage()
+    getDownloadURL(ref(storage,this.puzzle.webviewPath)).then((url) => {
+      str = url
+    })
+    return str
   }
   changePage(n: number): void {
     if (n == 1) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true });

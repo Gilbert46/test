@@ -39,11 +39,7 @@ export class Home1Page implements OnInit {
       center: {lat: 33.6,lng: -117.9,},
       zoom: 8
     });*/
-    //const apiKey = 'pb=!1m10!1m8!1m3!1d14173.96144885041!2d2.1629522!3d41.3775599!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sca!2ses!4v1458059080580';
-
     const mapRef = document.getElementById('map')!;
-    //mapRef.setAttribute('src', 'https://www.google.com/maps/embed?'+apiKey)
-
     const newMap = await GoogleMap.create({
       id: 'my-map',
       element: mapRef,

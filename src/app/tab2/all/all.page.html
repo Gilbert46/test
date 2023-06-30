@@ -33,7 +33,7 @@
       <ion-row>
         <ion-col size="{{ columne }}" *ngFor="let p of puzzles; index as position" (click)="detallPuzzle(position)">
           <div class="march">
-            <ion-img [src]="p.filepath"></ion-img>
+            <ion-img [src]="webViewImage(p.webviewPath)"></ion-img>
             <h3>{{ p.titulo }}</h3>
           </div>
         </ion-col>

@@ -40,6 +40,13 @@ export class AllPage implements OnInit {
       }, 300);
     });
   }
+  webViewImage(str: string): string {
+    const storage = getStorage()
+    getDownloadURL(ref(storage,this.puzzle.webviewPath)).then((url) => {
+      str = url
+    })
+    return str
+  }
   detallPuzzle(idx: number) : void {
     this.flag[0] = true
     this.puzzle = {marca:this.puzzles[idx].marca,titulo:this.puzzles[idx].titulo,categoria:this.puzzles[idx].categoria, precio:this.puzzles[idx].precio,piezas:this.puzzles[idx].piezas,propietario:this.puzzles[idx].propietario,filepath:this.puzzles[idx].filepath,webviewPath:this.puzzles[idx].webviewPath}
