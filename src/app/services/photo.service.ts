@@ -59,7 +59,7 @@ export class PhotoService {
     })
 
   }
-  private async pathUrl() {
+  public async pathUrlImage() {
     const storage = getStorage()
     getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
       this.filepath = url

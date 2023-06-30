@@ -51,7 +51,8 @@ export class NewPage implements OnInit {
     promise.then(() => {
       setTimeout(() => {
         this.puzzleFrom.controls['filepath'].setValue(this.photoService.filepath)
-        this.stepWebViewPath();
+        this.photoService.pathUrlImage()
+        this.stepWebViewPath()
       },1000)
     })
   }

@@ -3,7 +3,7 @@ import { Puzzle } from '../../interfaces/puzzle';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { PuzzleService } from '../../services/puzzle.service';
 import { AlertController } from '@ionic/angular';
-import { copyFileSync } from 'fs';
+import { DlimatgeService } from 'src/app/services/dlimatge.service';
 
 @Component({
   selector: 'app-all',
@@ -11,7 +11,7 @@ import { copyFileSync } from 'fs';
   styleUrls: ['./all.page.scss'],
 })
 export class AllPage implements OnInit {
-  constructor(private puzzleService: PuzzleService, private alertController: AlertController) { }
+  constructor(private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService) { }
   index: number = 0
   columne: number = 6
   flag: boolean[] = [false, false, false]
@@ -84,36 +84,7 @@ export class AllPage implements OnInit {
   }
   urlFile(path: Puzzle, i: number): void {
     this.flag[1] = false;
-    if (i == 0) {
-      const storage = getStorage();
-      const pathRef = ref(storage, this.puzzle.webviewPath)
-      getDownloadURL(ref(pathRef)).then((url) => {
-        let blob: Blob
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = (event) => {blob=xhr.response;};
-        xhr.open('POST', url);
-        xhr.send('downloads');
-        //window.location.href = '/src/assets/icons/icon-512x512.png'
-        this.showAlert('¡ FELICIDADES !', 'Descarga efectuada correctamente')
-      })
-      .catch((error) => {
-        switch(error.code) {
-          case 'storage/object-not-found':
-            this.showAlert('ERROR!!!', 'La imagen no existe en el servidor')
-            break;
-          case 'storage/unauthorized':
-            this.showAlert('NO PERMITIDO', 'Tienes que estar logado')
-            break;
-          case 'Access-Control-Allow-Origin':
-            this.showAlert('NO PERMITIDO', 'Bloqueado por CORS')
-            break;
-          case 'storage/unknown':
-            this.showAlert('ERROR!!!!', 'Error en la petición al servidor')
-            break;
-        }
-      });
-    }
+    if (i == 0) this.dlimatgeService.dowmloadImage(this.puzzle.webviewPath)
     if (i == 1) window.location.href = 'https://web.whatsapp.com/';
     if (i == 2) window.location.href= 'https://www.google.com/intl/es/gmail/about/'
     if (i == 3) window.location.href= 'https://twitter.com/'
@@ -177,12 +148,5 @@ export class AllPage implements OnInit {
     }
     return puzzle2;
   }
-  async showAlert(head: string, msg: string) {
-    const alert = await this.alertController.create({
-      header: head,
-      message: msg,
-      buttons: ['OK']
-    });
-    await alert.present()
-  }
+
 }
