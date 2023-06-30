@@ -52,7 +52,7 @@ export class NewPage implements OnInit {
       setTimeout(() => {
         this.puzzleFrom.controls['filepath'].setValue(this.photoService.filepath)
         this.puzzleFrom.controls['webviewPath'].setValue(this.photoService.webViewPath)
-      },1000)
+      },3000)
     })
   }
 

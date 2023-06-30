@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EnvironmentInjector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { TabsPage } from '../../tabs/tabs.page';
 import { GoogleMap } from '@capacitor/google-maps';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -34,24 +35,24 @@ export class Home1Page implements OnInit {
     })
   }
   async createMap() {
-    /*let map: google.maps.Map = new google.maps.Map(document.getElementById('map')!, {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 8,
-      mapId: String(this.authService.idx)
+    /*let map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+      center: {lat: 33.6,lng: -117.9,},
+      zoom: 8
     });*/
-    const apiKey = 'pb=!1m10!1m8!1m3!1d14173.96144885041!2d2.1629522!3d41.3775599!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sca!2ses!4v1458059080580';
+    //const apiKey = 'pb=!1m10!1m8!1m3!1d14173.96144885041!2d2.1629522!3d41.3775599!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sca!2ses!4v1458059080580';
+
     const mapRef = document.getElementById('map')!;
-    mapRef.setAttribute('src', 'https://www.google.com/maps/embed?'+apiKey)
-    /*
+    //mapRef.setAttribute('src', 'https://www.google.com/maps/embed?'+apiKey)
+
     const newMap = await GoogleMap.create({
       id: 'my-map',
       element: mapRef,
-      apiKey: apiKey,
+      apiKey: environment.firebase.apiKey,
       config: {
         center: {lat: 33.6,lng: -117.9,},
         zoom: 8,
       },
-    });*/
+    });
   }
   optionMenu(n: number): void {
     if (n == 1) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true })

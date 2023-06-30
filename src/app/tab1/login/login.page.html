@@ -10,6 +10,8 @@
     <ion-input fill="solid" type="password" placeholder="entrar contraseña" formControlName="password" [ngClass]="{'ion-invalid': credentials.controls['password'].invalid}"></ion-input>
     <div *ngIf="credentials.controls['password'].invalid"><ion-note>Password necesitas mínimo 6 carácteres</ion-note></div>
     <div [hidden]="!isLog[0]">
+      <!--<ion-input fill="solid" type="password" placeholder="entrar contraseña" formControlName="password2" [ngClass]="{'ion-invalid': credentials.controls['password2'].invalid}"></ion-input>
+      <div *ngIf="credentials.controls['password2'].invalid"><ion-note>Password igual al anterior</ion-note></div>-->
       <ion-input fill="solid" type="text" placeholder="entrar nombre completo" formControlName="name" [ngClass]="{'ion-invalid': !credentials.controls['name'].valid}"></ion-input>
       <div *ngIf="!credentials.controls['name'].valid"><ion-note>Nombre es obligatorio</ion-note></div>
       <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" [ngClass]="{'ion-invalid': !credentials.controls['adrece'].valid}"></ion-input>
