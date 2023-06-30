@@ -31,7 +31,6 @@ export class PhotoService {
       data: base64Data,
     })
     const upImageFile =  await this.upFileStage(savedFile, photo)
-    //const webViewUrl = await this.pathUrl(this.webViewPath)
   }
 
   private async readAsBase64(photo: Photo) {
@@ -51,7 +50,7 @@ export class PhotoService {
 
   private async upFileStage(photo: WriteFileResult, capture: Photo) {
     const storage = getStorage()
-    const storageRef = ref(storage, 'ingpuzlis/'+photo.uri)
+    const storageRef = ref(storage, 'imgpuzlis/'+photo.uri)
     const response = await fetch(capture.webPath!)
     const blob = await response.blob()
     uploadBytes(storageRef,blob).then((snapshot) => {
@@ -59,12 +58,12 @@ export class PhotoService {
       //console.log(this.webViewPath)
     })
 
-  }/*
-  private async pathUrl(pathFile: string) {
+  }
+  private async pathUrl() {
     const storage = getStorage()
-    getDownloadURL(ref(storage, pathFile)).then((url) => {
+    getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
       this.filepath = url
       //console.log(this.filepath)
     })
-  }*/
+  }
 }

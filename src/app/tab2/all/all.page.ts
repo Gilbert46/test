@@ -87,15 +87,14 @@ export class AllPage implements OnInit {
     if (i == 0) {
       const storage = getStorage();
       const pathRef = ref(storage, this.puzzle.webviewPath)
-      //console.log(pathRef)
       getDownloadURL(ref(pathRef)).then((url) => {
         let blob: Blob
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'blob';
         xhr.onload = (event) => {blob=xhr.response;};
-        xhr.open('GET', url);
-        xhr.send();
-        //window.location.href = ''+pathRef
+        xhr.open('POST', url);
+        xhr.send('downloads');
+        //window.location.href = '/src/assets/icons/icon-512x512.png'
         this.showAlert('¡ FELICIDADES !', 'Descarga efectuada correctamente')
       })
       .catch((error) => {

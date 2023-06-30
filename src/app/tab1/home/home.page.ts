@@ -35,17 +35,13 @@ export class Home1Page implements OnInit {
     })
   }
   async createMap() {
-    /*let map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-      center: {lat: 33.6,lng: -117.9,},
-      zoom: 8
-    });*/
     const mapRef = document.getElementById('map')!;
     const newMap = await GoogleMap.create({
       id: 'my-map',
       element: mapRef,
       apiKey: environment.firebase.apiKey,
       config: {
-        center: {lat: 33.6,lng: -117.9,},
+        center: {lat: 41.41,lng: 2.025},
         zoom: 8,
       },
     });
