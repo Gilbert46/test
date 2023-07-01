@@ -50,7 +50,7 @@ export class NewPage implements OnInit {
     const promise=new Promise((resolve, reject) => {resolve(123)})
     promise.then(() => {
       setTimeout(() => {
-        this.puzzleFrom.controls['filepath'].setValue(this.photoService.webViewPath)
+        this.puzzleFrom.controls['webviewPath'].setValue(this.photoService.webViewPath)
         this.photoService.pathUrlImage()
         this.stepWebViewPath()
       },1000)
@@ -60,7 +60,7 @@ export class NewPage implements OnInit {
     const promise=new Promise((resolve, reject) => {resolve(123)})
     promise.then(() => {
       setTimeout(() => {
-        this.puzzleFrom.controls['webviewPath'].setValue(this.photoService.filepath)
+        this.puzzleFrom.controls['filepath'].setValue(this.photoService.filepath)
       },1000)
     })
   }
