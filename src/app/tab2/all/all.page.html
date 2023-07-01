@@ -56,7 +56,9 @@
         <ion-button (click)="changeState(false, index, 0)"><ion-icon aria-hidden="true" color="warning" name="arrow-redo-outline"></ion-icon></ion-button>
       </div>
       <h1>{{ puzzle.titulo }}</h1>
-      <ion-img [src]="puzzle.filepath"></ion-img>
+      <div class="detall">
+        <ion-img [src]="puzzle.filepath"></ion-img>
+      </div>
       <p><em>marca comercial:</em> {{ puzzle.marca }}</p>
       <p><em>categoria temática:</em> {{ puzzle.categoria }} </p>
       <p><em>precio aproximado:</em> {{ puzzle.precio }} €</p>
