@@ -41,10 +41,23 @@ export class Home1Page implements OnInit {
       element: mapRef,
       apiKey: environment.firebase.apiKey,
       config: {
-        center: {lat: 41.41,lng: 2.025},
+        center: {lat: 41.4,lng: 2.05},
         zoom: 8,
       },
     });
+    const markerId = await newMap.addMarker({
+      coordinate: {
+        lat: 41.4,
+        lng: 2.05
+      }
+    });
+    await newMap.setCamera({
+      coordinate: {
+        lat: 41.4,
+        lng: 2.05
+      }
+    });
+    await newMap.enableClustering();
   }
   optionMenu(n: number): void {
     if (n == 1) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true })

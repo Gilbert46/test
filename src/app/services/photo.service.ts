@@ -17,8 +17,10 @@ export class PhotoService {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       quality: 90,
+      height: 300,
       width: 450,
-      height: 280
+      correctOrientation: true,
+      allowEditing: true
     })
     const savedImageFile = await this.savePicture(capturePhoto);
   }
@@ -57,7 +59,6 @@ export class PhotoService {
       this.webViewPath = 'gs://puzzle-21pop.appspot.com/imgpuzlis'+photo.uri
       getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
         this.filepath = url
-        console.log(this.filepath)
       })
     })
   }

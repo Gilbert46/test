@@ -48,8 +48,9 @@ export class AvatarService {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       quality: 90,
-      width: 250,
       height: 250,
+      width: 250,
+      correctOrientation: true,
       allowEditing: true
     })
     const savedImageFile = await this.savePicture(capturePhoto);
@@ -86,14 +87,10 @@ export class AvatarService {
     const response = await fetch(capture.webPath!)
     const blob = await response.blob()
     uploadBytes(storageRef,blob).then((snapshot) => {
-      this.webviewPath = 'gs://puzzle-21pop.appspot.com/imgusers/'+avatar.uri
+      this.webviewPath = 'gs://puzzle-21pop.appspot.com/imgusers'+avatar.uri
+      getDownloadURL(ref(storage, this.webviewPath)).then((url) => {
+        this.filepath = url
+      })
     })
   }
-/*
-  public async pathUrlImage() {
-    const storage = getStorage()
-    getDownloadURL(ref(storage, this.webviewPath)).then((url) => {
-      this.filepath = url
-    })
-  }*/
 }

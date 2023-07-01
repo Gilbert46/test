@@ -55,7 +55,7 @@ export class NewPage implements OnInit {
       this.showAlert('¡ FELICIDADES !', 'Puzzle añadido correctamente.')
       this.changePage(2)
     }
-    else this.showAlert('ERROR', 'Falta añadir la fotografia.')
+    else this.showAlert('ERROR !!!', 'Falta añadir la fotografia.')
   }
 
   async showAlert(head: string, msg: string) {
