@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { Filesystem, Directory, WriteFileResult } from '@capacitor/filesystem';
-import { Preferences } from '@capacitor/preferences';
+import { Filesystem, WriteFileResult } from '@capacitor/filesystem';
 import { getDownloadURL } from '@angular/fire/storage';
 
 @Injectable({
@@ -17,7 +16,10 @@ export class PhotoService {
     const capturePhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
-      quality: 100,
+      quality: 90,
+      width: 450,
+      height: 300,
+      correctOrientation: true,
       allowEditing: true
     })
     const savedImageFile = await this.savePicture(capturePhoto);
