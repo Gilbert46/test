@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Puzzle } from '../../interfaces/puzzle';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { PuzzleService } from '../../services/puzzle.service';
-import { AlertController } from '@ionic/angular';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
 
 @Component({
@@ -39,13 +38,6 @@ export class AllPage implements OnInit {
         this.sortPuzzle(price, pices, title);
       }, 300);
     });
-  }
-  webViewImage(str: string): string {
-    const storage = getStorage()
-    getDownloadURL(ref(storage,this.puzzle.webviewPath)).then((url) => {
-      str = url
-    })
-    return str
   }
   detallPuzzle(idx: number) : void {
     this.flag[0] = true

@@ -18,16 +18,14 @@ export class PhotoService {
       source: CameraSource.Camera,
       quality: 90,
       width: 450,
-      height: 300,
-      correctOrientation: true,
-      allowEditing: true
+      height: 280
     })
     const savedImageFile = await this.savePicture(capturePhoto);
   }
 
   private async savePicture(photo: Photo) {
     const base64Data = await this.readAsBase64(photo);
-    const fileName = new Date().getTime() + '.jpeg';
+    const fileName = new Date().getTime() + '.png';
     const savedFile = await Filesystem.writeFile({
       path: fileName,
       data: base64Data,
@@ -56,16 +54,11 @@ export class PhotoService {
     const response = await fetch(capture.webPath!)
     const blob = await response.blob()
     uploadBytes(storageRef,blob).then((snapshot) => {
-      this.webViewPath = 'gs://puzzle-21pop.appspot.com/imgpuzlis/'+photo.uri
-      //console.log(this.webViewPath)
-    })
-
-  }
-  public async pathUrlImage() {
-    const storage = getStorage()
-    getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
-      this.filepath = url
-      //console.log(this.filepath)
+      this.webViewPath = 'gs://puzzle-21pop.appspot.com/imgpuzlis'+photo.uri
+      getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
+        this.filepath = url
+        console.log(this.filepath)
+      })
     })
   }
 }

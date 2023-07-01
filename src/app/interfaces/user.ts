@@ -5,5 +5,7 @@ export interface User {
   adrece?: string,
   phone?: string,
   id?: string,
+  filepath?: string,
+  webviewPath?: string,
   localitation?: string
 }

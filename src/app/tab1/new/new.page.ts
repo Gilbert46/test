@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PhotoService } from '../../services/photo.service';
 import { PuzzleService } from 'src/app/services/puzzle.service';
+import { getDownloadURL, getStorage, ref } from '@angular/fire/storage';
+import { setPersistence } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-new',
@@ -14,7 +16,7 @@ import { PuzzleService } from 'src/app/services/puzzle.service';
 })
 export class NewPage implements OnInit {
   idField: string = ''
-  puzzleFrom: FormGroup = new FormGroup({marca: new FormControl('', [Validators.required, Validators.minLength(3)]), titulo: new FormControl('', [Validators.required, Validators.minLength(3)]), categoria: new FormControl('', [Validators.required, Validators.minLength(3)]), precio: new FormControl('', [Validators.required, Validators.minLength(3)]), piezas: new FormControl('', [Validators.required, Validators.minLength(3)]), propietario: new FormControl('',[Validators.required, Validators.minLength(3)]), filepath: new FormControl('', [Validators.required, Validators.minLength(3)]), webviewPath: new FormControl('', [Validators.required, Validators.minLength(3)]), alto: new FormControl(''), ancho: new FormControl(''), año: new FormControl(''), condicion: new FormControl(''), estado: new FormControl(''), comentario: new FormGroup(''), privado: new FormGroup('') ,userid: new FormControl(''), localizacion: new FormControl(''), id: new FormControl('')})
+  puzzleFrom: FormGroup = new FormGroup({marca: new FormControl('', [Validators.required, Validators.minLength(3)]), titulo: new FormControl('', [Validators.required, Validators.minLength(3)]), categoria: new FormControl('', [Validators.required, Validators.minLength(3)]), precio: new FormControl('', [Validators.required, Validators.minLength(3)]), piezas: new FormControl('', [Validators.required, Validators.minLength(3)]), propietario: new FormControl('',[Validators.required, Validators.minLength(3)]), filepath: new FormControl(''), webviewPath: new FormControl(''), alto: new FormControl(''), ancho: new FormControl(''), año: new FormControl(''), condicion: new FormControl(''), estado: new FormControl(''), comentario: new FormGroup(''), privado: new FormGroup('') ,userid: new FormControl(''), localizacion: new FormControl(''), id: new FormControl('')})
   constructor(private location: Location, private router: Router, private authService: AuthService, private photoService: PhotoService, private puzzleService: PuzzleService, private alertController: AlertController) { }
 
   ngOnInit() {
@@ -43,31 +45,17 @@ export class NewPage implements OnInit {
 
   addPhoto():  void {
     this.photoService.addNewPhotoStore()
-    this.stepAddPhoto()
-  }
-
-  async stepAddPhoto() {
-    const promise=new Promise((resolve, reject) => {resolve(123)})
-    promise.then(() => {
-      setTimeout(() => {
-        this.puzzleFrom.controls['webviewPath'].setValue(this.photoService.webViewPath)
-        this.photoService.pathUrlImage()
-        this.stepWebViewPath()
-      },1000)
-    })
-  }
-  async stepWebViewPath() {
-    const promise=new Promise((resolve, reject) => {resolve(123)})
-    promise.then(() => {
-      setTimeout(() => {
-        this.puzzleFrom.controls['filepath'].setValue(this.photoService.filepath)
-      },1000)
-    })
   }
 
   addPuzzle(): void {
-    this.puzzleService.addPuzzle(this.puzzleFrom.value)
-    this.showAlert('¡ FELICIDADES !', 'Puzzle añadido correctamente.')
+    this.puzzleFrom.controls['webviewPath'].setValue(this.photoService.webViewPath)
+    this.puzzleFrom.controls['filepath'].setValue(this.photoService.filepath)
+    if(this.photoService.webViewPath != '') {
+      this.puzzleService.addPuzzle(this.puzzleFrom.value)
+      this.showAlert('¡ FELICIDADES !', 'Puzzle añadido correctamente.')
+      this.changePage(2)
+    }
+    else this.showAlert('ERROR', 'Falta añadir la fotografia.')
   }
 
   async showAlert(head: string, msg: string) {
@@ -77,7 +65,6 @@ export class NewPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present()
-    this.changePage(2)
   }
 
   changePage(n: number): void {

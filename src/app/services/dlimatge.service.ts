@@ -18,7 +18,7 @@ export class DlimatgeService {
           xhr.responseType = 'blob';
           xhr.onload = (event) => {blob=xhr.response;};
           xhr.open('POST', url);
-          xhr.send('downloads');
+          xhr.send('downloads/image.png');
           //window.location.href = '/src/assets/icons/icon-512x512.png'
           this.showAlert('¡ FELICIDADES !', 'Descarga efectuada correctamente')
         })

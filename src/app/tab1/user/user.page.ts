@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+//import  { AvatarService } from '../../services/avatar.service'
 import { User } from '../../interfaces/user';
 
 
@@ -16,7 +17,7 @@ export class UserPage implements OnInit {
   passw: string = ''
   user: User = {email:'',password:'',name:'',adrece:'',phone:'',id:''}
   userForm: FormGroup = new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),password2:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl ('',[Validators.required,Validators.minLength(5)]),phone:new FormControl('',[Validators.required, Validators.maxLength(9),Validators.minLength(9)])})
-  constructor(private fB:FormBuilder,private authService:AuthService,private router:Router, private location:Location, private alertController:AlertController) { }
+  constructor(private fB:FormBuilder,private authService:AuthService,private router:Router, private location:Location, private alertController:AlertController/* private avatarService: AvatarService*/) { }
 
   ngOnInit() {
     this.initUser()
@@ -45,6 +46,10 @@ export class UserPage implements OnInit {
 
   chPw(): void {
     this.passw=this.userForm.controls['password'].value
+  }
+
+  changeAvatar() {
+    //this.avatarService.newAvatarStore()
   }
 
   update(): void {
