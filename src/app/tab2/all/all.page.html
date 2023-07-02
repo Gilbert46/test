@@ -41,8 +41,8 @@
     </ion-grid>
     <ion-title *ngIf="puzzles.length <= 0">No se han encontrado puzzles</ion-title>
     <br/><br/><br/><br/>
-    <div id="pagination">
-      <div id="alinear">
+    <div class="pagination">
+      <div class="alinear">
         <ion-button class="pagina" *ngFor="let bl of blPages; index as page" [disabled]="bl" (click)="otherPage(page)">{{ page + 1 }}</ion-button>
       </div>
     </div>

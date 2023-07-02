@@ -14,7 +14,7 @@
       </ion-buttons>
     </div>
     <div class="marc">
-      <ion-avatar class="avatar" (click)="changeAvatar()">
+      <ion-avatar class="avatar" (click)="searchImg()">
         <img *ngIf="imgSt; else placeholder_avatar" [src]="imgSt"/>
         <ng-template #placeholder_avatar>
           <div class="fallback">

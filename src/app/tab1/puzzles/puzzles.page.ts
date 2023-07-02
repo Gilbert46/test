@@ -78,6 +78,7 @@ export class PuzzlesPage implements OnInit {
         }
       }
     }
+    this.paginaSelect()
   }
   async paginaSelect() {
     const promise = new Promise ((resolve, reject) => {resolve(123)})
@@ -96,6 +97,7 @@ export class PuzzlesPage implements OnInit {
           if (this.npage > 0 && cont < 10 * this.npage) {
             this.puzzles.splice(f, 1);
             cont++;
+            f--;
           }
           if (f >= 10 && this.npage == 0) {
             this.puzzles.splice(f, 1);

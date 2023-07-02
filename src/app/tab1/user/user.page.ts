@@ -50,6 +50,15 @@ export class UserPage implements OnInit {
     const chAvatar = await this.avatarService.newAvatarStore()
   }
 
+  searchImg(): void {
+    if (this.avatarService.filepath != '') {
+      this.userForm.controls['webviewPath'].setValue(this.avatarService.webviewPath)
+      this.userForm.controls['filepath'].setValue(this.avatarService.filepath)
+      this.imgSt=this.userForm.controls['filepath'].value
+    }
+    else this.changeAvatar()
+  }
+
   update(): void {
     if (this.avatarService.webviewPath != '') this.userForm.controls['webviewPath'].setValue(this.avatarService.webviewPath)
     if (this.avatarService.filepath != '') this.userForm.controls['filepath'].setValue(this.avatarService.filepath)
