@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Puzzle } from '../../interfaces/puzzle';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { PuzzleService } from '../../services/puzzle.service';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
 
@@ -12,13 +11,16 @@ import { DlimatgeService } from 'src/app/services/dlimatge.service';
 export class AllPage implements OnInit {
   constructor(private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService) { }
   index: number = 0
+  npage: number = 0
   columne: number = 6
+  blPages: boolean[] = []
   flag: boolean[] = [false, false, false]
   puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:''}
   puzzles : Puzzle[] = []
 
   ngOnInit(): void {
     if (screen.width > 980) this.columne = 3
+    this.npage = 0
     this.getSearchValue();
   }
   getSearchValue(): void {
@@ -97,6 +99,37 @@ export class AllPage implements OnInit {
         }
       }
     }
+    //this.paginaSelect()
+  }
+  async paginaSelect() {
+    const promise = new Promise ((resolve, reject) => {resolve(123)})
+    promise.then(() => {
+      setTimeout (() => {
+        if (this.puzzles.length > 0) {
+          let maxPage = Math.ceil(this.puzzles.length/10)
+          for (let e=0; e<maxPage; e++) {
+            if (this.npage == e) this.blPages[e] = true
+            else this.blPages[e]=false
+          }
+        }
+        else this.blPages[0]= true;
+        let cont: number = 0
+        for (let f=0; f < this.puzzles.length; f++) {
+          if (this.npage > 0 && cont < 10 * this.npage) {
+            this.puzzles.splice(f, 1);
+            cont++;
+          }
+          if (f >= 10 && this.npage == 0) {
+            this.puzzles.splice(f, 1);
+            f--;
+          }
+        }
+      }, 300);
+    });
+  }
+  otherPage(n: number):void {
+    this.npage = n
+    this.getSearchValue()
   }
   orderTitle(puzzles2: Puzzle[]): Puzzle[] {
     for (let i=0; i < puzzles2.length - 1; i++) {

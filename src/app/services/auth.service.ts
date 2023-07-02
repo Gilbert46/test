@@ -16,6 +16,7 @@ export class AuthService {
   async register( usuari: User) {
 		try {
 			const user = await createUserWithEmailAndPassword(this.auth, usuari.email, usuari.password)
+      usuari.id = String(this.auth)
       this.addUser(usuari)
       this.getIdfield(usuari)
 			return user
@@ -50,7 +51,7 @@ export class AuthService {
   }
   updateUser(usuari: User) {
     const use =  doc(this.firestore, `users/${usuari.id}`)
-    return updateDoc(use, {email:usuari.email, password:usuari.password, name:usuari.name, adrece:usuari.adrece, phone:usuari.phone, id:usuari.id})
+    return updateDoc(use, {email:usuari.email, password:usuari.password, name:usuari.name, adrece:usuari.adrece, phone:usuari.phone, id:usuari.id, filepath:usuari.filepath, webviewPath:usuari.webviewPath})
   }
 	logout() {
     return signOut(this.auth);

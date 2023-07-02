@@ -8,9 +8,9 @@
   <div class="search">
     <div class="buttons">
       <ion-buttons class="flex">
-        <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" name="play-back-outline"></ion-icon></ion-button>
-        <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" name="play-forward-outline"></ion-icon></ion-button>
-        <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" size="large" name="play-back-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" size="large" name="play-forward-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" size="large" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
       </ion-buttons>
     </div>
     <form [formGroup]="puzzleFrom" (ngSubmit)="addPuzzle()">
@@ -23,10 +23,10 @@
       <ion-fab horizontal="center" slot="fixed"><ion-fab-button><ion-icon name="camera" (click)="addPhoto()"></ion-icon></ion-fab-button></ion-fab>
       <br/><br/><br/><br/>
       <div class="buttons">
-        <ion-buttons class="flex">
-          <ion-button type="submit" [disabled]="!puzzleFrom.valid"><ion-icon aria-hidden="true" size="large" color="success" name="add-circle"></ion-icon></ion-button>
-          <ion-button type="button" (click)="changePage(2)"><ion-icon aria-hidden="true" size="large" color="danger" name="close-circle"></ion-icon></ion-button>
-        </ion-buttons>
+        <div class="flex">
+          <ion-button type="submit" [disabled]="!puzzleFrom.valid"><ion-icon size="large" color="success" name="add-circle"></ion-icon></ion-button>
+          <ion-button type="button" (click)="changePage(2)"><ion-icon size="large" color="danger" name="close-circle"></ion-icon></ion-button>
+        </div>
       </div>
     </form>
   </div>

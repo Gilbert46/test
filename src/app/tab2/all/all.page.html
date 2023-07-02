@@ -34,12 +34,18 @@
         <ion-col size="{{ columne }}" *ngFor="let p of puzzles; index as position" (click)="detallPuzzle(position)">
           <div class="march">
               <ion-img class="imatge" [src]="p.filepath"></ion-img>
-            <h3>{{ p.titulo }}</h3>
+            <h3>{{ position+(10*npage)+1 }}: {{ p.titulo }}</h3>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-title *ngIf="puzzles.length <= 0">No se han encontrado puzzles</ion-title>
+    <br/><br/><br/><br/>
+    <div id="pagination">
+      <div id="alinear">
+        <ion-button class="pagina" *ngFor="let bl of blPages; index as page" [disabled]="bl" (click)="otherPage(page)">{{ page + 1 }}</ion-button>
+      </div>
+    </div>
   </div>
   <div [hidden]="!flag[0]">
     <ion-card>

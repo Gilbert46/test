@@ -16,6 +16,8 @@ export class PuzzlesPage implements OnInit {
   idField: string = ''
   index: number = 0
   columne: number = 6
+  npage: number = 0
+  blPages: boolean[] = []
   flag: boolean[] = [false, false, false]
   puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:'',alto:0,ancho:0,año:0,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:''}
   puzzles : Puzzle[] = []
@@ -76,6 +78,36 @@ export class PuzzlesPage implements OnInit {
         }
       }
     }
+  }
+  async paginaSelect() {
+    const promise = new Promise ((resolve, reject) => {resolve(123)})
+    promise.then(() => {
+      setTimeout (() => {
+        if (this.puzzles.length > 0) {
+          let maxPage = Math.ceil(this.puzzles.length/10)
+          for (let e=0; e<maxPage; e++) {
+            if (this.npage == e) this.blPages[e] = true
+            else this.blPages[e]=false
+          }
+        }
+        else this.blPages[0]= true;
+        let cont: number = 0
+        for (let f=0; f < this.puzzles.length; f++) {
+          if (this.npage > 0 && cont < 10 * this.npage) {
+            this.puzzles.splice(f, 1);
+            cont++;
+          }
+          if (f >= 10 && this.npage == 0) {
+            this.puzzles.splice(f, 1);
+            f--;
+          }
+        }
+      }, 300);
+    });
+  }
+  otherPage(n: number):void {
+    this.npage = n
+    this.getSearchValue()
   }
   orderTitle(puzzles2 : Puzzle[]): Puzzle[] {
     for (let e=0; e<puzzles2.length;e++) {

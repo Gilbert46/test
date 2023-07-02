@@ -8,12 +8,22 @@
   <div class="search">
     <div class="buttons">
       <ion-buttons class="flex">
-        <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" name="play-back-outline"></ion-icon></ion-button>
-        <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" name="play-forward-outline"></ion-icon></ion-button>
-        <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" size="large" name="play-back-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" size="large" name="play-forward-outline"></ion-icon></ion-button>
+        <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" size="large" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
       </ion-buttons>
     </div>
-
+    <div class="marc">
+      <ion-avatar class="avatar" (click)="changeAvatar()">
+        <img *ngIf="imgSt; else placeholder_avatar" [src]="imgSt"/>
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Hacer Avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+    </div>
+    <br/>
     <form [formGroup]="userForm" (ngSubmit)="update()">
       <ion-input fill="solid" type="email" value="{{ user.email }}" [disabled]="true"></ion-input>
       <ion-input fill="solid" type="text" placeholder="entrar nombre completo" formControlName="name" [ngClass]="{'ion-invalid': !userForm.controls['name'].valid}"></ion-input>
@@ -26,12 +36,15 @@
       <div *ngIf="!userForm.controls['password'].valid"><ion-note>Contraseña necesitas mínimo 6 carácteres</ion-note></div>
       <ion-input fill="solid" type="password" value="{{ user.password }}" [disabled]="true"></ion-input>
       <div *ngIf="!userForm.controls['password'].valid"><ion-note>Las dos contraseñas han ser idénticas</ion-note></div>
+      <!--<ion-input fill="solid" type="file" formControlName="webviewPath"> otro Avatar</ion-input>-->
+      <br/>
+      <ion-fab horizontal="center" slot="fixed"><ion-fab-button><ion-icon name="camera" (click)="changeAvatar()"></ion-icon></ion-fab-button></ion-fab>
       <br/><br/><br/><br/>
       <div class="buttons">
-        <ion-buttons class="flex">
-          <ion-button type="submit" [disabled]="!userForm.valid"><ion-icon aria-hidden="true" size="large" color="success" name="checkmark-circle"></ion-icon></ion-button>
-          <ion-button type="button" (click)="changePage(2)"><ion-icon aria-hidden="true"  size="large" color="danger" name="close-circle"></ion-icon></ion-button>
-        </ion-buttons>
+        <div class="flex">
+          <ion-button type="submit" [disabled]="!userForm.valid"><ion-icon size="large" color="success" name="checkmark-circle"></ion-icon></ion-button>
+          <ion-button type="button" (click)="changePage(2)"><ion-icon size="large" color="danger" name="close-circle"></ion-icon></ion-button>
+        </div>
       </div>
     </form>
   </div>

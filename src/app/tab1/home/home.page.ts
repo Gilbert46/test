@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['home.page.scss']
 })
 export class Home1Page implements OnInit {
-  user: User={email:'',password:'',name:'',adrece:'',phone:'',id:''}
+  user: User={email:'',password:'',name:'',adrece:'',phone:'',id:'',filepath:'',webviewPath:''}
   constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage) {}
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class Home1Page implements OnInit {
   }
   async initUser() {
     const idField = String(this.authService.idx);
-    this.authService.getUsuari(idField).subscribe(res => {this.user={email:res.email,password:res.password,name:res.name,adrece:res.adrece,phone:res.phone,id:res.id};});
+    this.authService.getUsuari(idField).subscribe(res => {this.user={email:res.email,password:res.password,name:res.name,adrece:res.adrece,phone:res.phone,id:res.id,filepath:res.filepath, webviewPath:res.webviewPath};});
     this.sincronMap()
   }
 

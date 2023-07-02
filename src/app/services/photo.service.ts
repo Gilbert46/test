@@ -17,8 +17,8 @@ export class PhotoService {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       quality: 90,
-      height: 300,
-      width: 450,
+      height: 200,
+      width: 300,
       correctOrientation: true,
       allowEditing: true
     })
