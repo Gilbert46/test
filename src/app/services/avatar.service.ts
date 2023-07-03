@@ -57,7 +57,7 @@ export class AvatarService {
     const response = await fetch(capture.webPath!)
     const blob = await response.blob()
     uploadBytes(storageRef,blob).then((snapshot) => {
-      this.webviewPath = 'gs://puzzle-21pop.appspot.com/imgusers'+avatar.uri+''
+      this.webviewPath = String(storageRef)
       getDownloadURL(ref(storage, this.webviewPath)).then((url) => {
         this.filepath = url
       })

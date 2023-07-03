@@ -56,7 +56,7 @@ export class PhotoService {
     const response = await fetch(capture.webPath!)
     const blob = await response.blob()
     uploadBytes(storageRef,blob).then((snapshot) => {
-      this.webViewPath = 'gs://puzzle-21pop.appspot.com/imgpuzlis'+photo.uri
+      this.webViewPath = String(storageRef)
       getDownloadURL(ref(storage, this.webViewPath)).then((url) => {
         this.filepath = url
       })

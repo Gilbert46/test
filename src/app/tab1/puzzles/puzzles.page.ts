@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Puzzle } from '../../interfaces/puzzle';
 import { PuzzleService } from '../../services/puzzle.service';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { DlimatgeService } from 'src/app/services/dlimatge.service';
 
 
 @Component({
@@ -13,6 +13,9 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
   styleUrls: ['./puzzles.page.scss'],
 })
 export class PuzzlesPage implements OnInit {
+
+  constructor(private authService: AuthService, private location: Location, private router: Router, private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService) {}
+
   idField: string = ''
   index: number = 0
   columne: number = 6
@@ -21,7 +24,7 @@ export class PuzzlesPage implements OnInit {
   flag: boolean[] = [false, false, false]
   puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:'',alto:0,ancho:0,año:0,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:''}
   puzzles : Puzzle[] = []
-  constructor(private authService: AuthService, private location: Location, private router: Router, private puzzleService: PuzzleService) {}
+
 
   ngOnInit() {
     if (screen.width > 980) this.columne = 3
@@ -29,14 +32,8 @@ export class PuzzlesPage implements OnInit {
   }
   initUser(): void {
     this.idField = String(this.authService.idx)
+    this.npage = 0
     this.getSearchValue();
-  }
-  webViewImage(str: string): String {
-    const storage = getStorage()
-    getDownloadURL(ref(storage,this.puzzle.webviewPath)).then((url) => {
-      str = url
-    })
-    return str
   }
   changePage(n: number): void {
     if (n == 1) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true });
@@ -62,6 +59,9 @@ export class PuzzlesPage implements OnInit {
       }, 300);
     });
   }
+  downloadFile(dlimg: string) {
+    this.dlimatgeService.dowmloadImage(dlimg);
+  }
   sortPuzzle(price: number, pices: number, title: string) {
     for (let i=0; i<this.puzzles.length; i++) {
       if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {
@@ -78,34 +78,26 @@ export class PuzzlesPage implements OnInit {
         }
       }
     }
-    this.paginaSelect()
-  }
-  async paginaSelect() {
-    const promise = new Promise ((resolve, reject) => {resolve(123)})
-    promise.then(() => {
-      setTimeout (() => {
-        if (this.puzzles.length > 0) {
-          let maxPage = Math.ceil(this.puzzles.length/10)
-          for (let e=0; e<maxPage; e++) {
-            if (this.npage == e) this.blPages[e] = true
-            else this.blPages[e]=false
-          }
-        }
-        else this.blPages[0]= true;
-        let cont: number = 0
-        for (let f=0; f < this.puzzles.length; f++) {
-          if (this.npage > 0 && cont < 10 * this.npage) {
-            this.puzzles.splice(f, 1);
-            cont++;
-            f--;
-          }
-          if (f >= 10 && this.npage == 0) {
-            this.puzzles.splice(f, 1);
-            f--;
-          }
-        }
-      }, 300);
-    });
+    if (this.puzzles.length > 0) {
+      let maxPage = Math.ceil(this.puzzles.length/10)
+      for (let e=0; e<maxPage; e++) {
+        if (this.npage == e) this.blPages[e] = true
+        else this.blPages[e]=false
+      }
+    }
+    else this.blPages[0]= true;
+    let cont: number = 0
+    for (let f=0; f < this.puzzles.length; f++) {
+      if (this.npage > 0 && cont < 10 * this.npage) {
+        this.puzzles.splice(f, 1);
+        cont++;
+        f--;
+      }
+      if (f >= 10 && this.npage == 0) {
+        this.puzzles.splice(f, 1);
+        f--;
+      }
+    }
   }
   otherPage(n: number):void {
     this.npage = n

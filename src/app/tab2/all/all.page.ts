@@ -19,8 +19,8 @@ export class AllPage implements OnInit {
   puzzles : Puzzle[] = []
 
   ngOnInit(): void {
-    if (screen.width > 980) this.columne = 3
-    this.npage = 0
+    if (screen.width > 980) this.columne = 3;
+    this.npage = 0;
     this.getSearchValue();
   }
   getSearchValue(): void {
@@ -79,9 +79,9 @@ export class AllPage implements OnInit {
   urlFile(path: Puzzle, i: number): void {
     this.flag[1] = false;
     if (i == 0) this.dlimatgeService.dowmloadImage(this.puzzle.webviewPath)
-    if (i == 1) window.location.href = 'https://web.whatsapp.com/';
+    /*if (i == 1) window.location.href = 'https://web.whatsapp.com/';
     if (i == 2) window.location.href= 'https://www.google.com/intl/es/gmail/about/'
-    if (i == 3) window.location.href= 'https://twitter.com/'
+    if (i == 3) window.location.href= 'https://twitter.com/'*/
   }
   sortPuzzle(price: number, pices: number, title: string): void {
     for (let i=0; i<this.puzzles.length; i++) {
@@ -99,34 +99,26 @@ export class AllPage implements OnInit {
         }
       }
     }
-    this.paginaSelect()
-  }
-  async paginaSelect() {
-    const promise = new Promise ((resolve, reject) => {resolve(123)})
-    promise.then(() => {
-      setTimeout (() => {
-        if (this.puzzles.length > 0) {
-          let maxPage = Math.ceil(this.puzzles.length/10)
-          for (let e=0; e<maxPage; e++) {
-            if (this.npage == e) this.blPages[e] = true
-            else this.blPages[e]=false
-          }
-        }
-        else this.blPages[0]= true;
-        let cont: number = 0
-        for (let f=0; f < this.puzzles.length; f++) {
-          if (this.npage > 0 && cont < 10 * this.npage) {
-            this.puzzles.splice(f, 1);
-            cont++;
-            f--;
-          }
-          if (f >= 10 && this.npage == 0) {
-            this.puzzles.splice(f, 1);
-            f--;
-          }
-        }
-      }, 300);
-    });
+    if (this.puzzles.length > 0) {
+      let maxPage = Math.ceil(this.puzzles.length/10)
+      for (let e=0; e<maxPage; e++) {
+        if (this.npage == e) this.blPages[e] = true
+        else this.blPages[e]=false
+      }
+    }
+    else this.blPages[0]= true;
+    let cont: number = 0
+    for (let f=0; f < this.puzzles.length; f++) {
+      if (this.npage > 0 && cont < 10 * this.npage) {
+        this.puzzles.splice(f, 1);
+        cont++;
+        f--;
+      }
+      if (f >= 10 && this.npage == 0) {
+        this.puzzles.splice(f, 1);
+        f--;
+      }
+    }
   }
   otherPage(n: number):void {
     this.npage = n

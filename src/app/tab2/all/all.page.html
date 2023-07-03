@@ -39,13 +39,14 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-title *ngIf="puzzles.length <= 0">No se han encontrado puzzles</ion-title>
-    <br/><br/><br/><br/>
+    <ion-title class="zero" *ngIf="puzzles.length <= 0">No se han encontrado puzzles</ion-title>
+    <br/><br/>
     <div class="pagination">
       <div class="alinear">
         <ion-button class="pagina" *ngFor="let bl of blPages; index as page" [disabled]="bl" (click)="otherPage(page)">{{ page + 1 }}</ion-button>
       </div>
     </div>
+    <br/><br/>
   </div>
   <div [hidden]="!flag[0]">
     <ion-card>
@@ -53,11 +54,11 @@
       <ion-button (click)="setIsMenu(!flag[1])"><ion-icon aria-hidden="true" name="menu-outline"></ion-icon></ion-button>
       <ion-button (click)="changeState(true, index, 1)"><ion-icon aria-hidden="true" name="play-forward-outline"></ion-icon></ion-button>
       <div class="menu" [hidden]="!flag[1]">
-        <!--<a href="C:/User/usuario/workstationIonic/puzzlepop/test/src/assets/icon/favicon.png"><ion-button><ion-icon aria-hidden="true" name="download-outline"></ion-icon></ion-button></a>-->
         <ion-button (click)="urlFile(puzzle, 0)"><ion-icon aria-hidden="true" name="download-outline"></ion-icon></ion-button>
+        <!--<a href="puzzle.webViewPath"><ion-button><ion-icon aria-hidden="true" name="download-outline"></ion-icon></ion-button></a>
         <ion-button (click)="urlFile(puzzle, 2)"><ion-icon aria-hidden name="logo-medium"></ion-icon></ion-button>
         <ion-button (click)="urlFile(puzzle, 3)"><ion-icon aria-hidden ion-icon name="logo-tumblr"></ion-icon></ion-button>
-        <ion-button (click)="urlFile(puzzle, 1)"><ion-icon aria-hidden="true" name="logo-whatsapp"></ion-icon></ion-button>
+        <ion-button (click)="urlFile(puzzle, 1)"><ion-icon aria-hidden="true" name="logo-whatsapp"></ion-icon></ion-button>-->
         <ion-button (click)="playPuzzle(index)"><ion-icon aria-hidden="true" name="play-outline"></ion-icon></ion-button>
         <ion-button (click)="changeState(false, index, 0)"><ion-icon aria-hidden="true" color="warning" name="arrow-redo-outline"></ion-icon></ion-button>
       </div>
