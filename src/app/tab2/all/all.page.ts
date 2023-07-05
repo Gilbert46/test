@@ -38,8 +38,31 @@ export class AllPage implements OnInit {
     promise.then(() => {
       setTimeout (() => {
         this.sortPuzzle(price, pices, title);
+        this.paginePuzle();
       }, 300);
     });
+  }
+  paginePuzle(): void {
+    let maxPage = Math.ceil(this.puzzles.length/10)
+    if (maxPage < 1) this.blPages[0]=true
+    else {
+      for (let e=0; e<maxPage; e++) {
+        if (this.npage == e) this.blPages[e] = true
+        else this.blPages[e]=false
+      }
+    }
+    let cont: number = 0
+    for (let f=0; f < this.puzzles.length; f++) {
+      if (this.npage > 0 && cont < 10 * this.npage) {
+        this.puzzles.splice(f, 1);
+        cont++;
+        f--;
+      }
+      if (f >= 10 && this.npage == 0) {
+        this.puzzles.splice(f, 1);
+        f--;
+      }
+    }
   }
   detallPuzzle(idx: number) : void {
     this.flag[0] = true
@@ -97,26 +120,6 @@ export class AllPage implements OnInit {
             break;
           }
         }
-      }
-    }
-    if (this.puzzles.length > 0) {
-      let maxPage = Math.ceil(this.puzzles.length/10)
-      for (let e=0; e<maxPage; e++) {
-        if (this.npage == e) this.blPages[e] = true
-        else this.blPages[e]=false
-      }
-    }
-    else this.blPages[0]= true;
-    let cont: number = 0
-    for (let f=0; f < this.puzzles.length; f++) {
-      if (this.npage > 0 && cont < 10 * this.npage) {
-        this.puzzles.splice(f, 1);
-        cont++;
-        f--;
-      }
-      if (f >= 10 && this.npage == 0) {
-        this.puzzles.splice(f, 1);
-        f--;
       }
     }
   }

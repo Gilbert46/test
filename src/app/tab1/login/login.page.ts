@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { UserCredential } from '@angular/fire/auth';
+//import { Plugins } from '@capacitor/core';
+//const { share } = Plugins;
+import { Share } from '@capacitor/share'
 
 @Component({
   selector: 'app-login',
@@ -45,13 +48,24 @@ export class LoginPage implements OnInit {
       },1000)
     })
   }
-  async showAlert(head: string, msg: string) {
+  async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
-      header: head,
-      message: msg,
+      header,
+      message,
       buttons: ['OK']
     });
     await alert.present()
+  }
+  resetPassword(email: string, pw:string): void {
+    this.authService.newPassword(email, pw)
+  }
+  shareApp(): void {
+    Share.share({
+      title: 'Puzzle-Pop',
+      text: 'Esta es la nueva aplicación para aficionados a los puzzles, pruevala',
+      url: 'http://puzzle-21pop.web.app/',
+      //dialogTitle: 'Compartir con...',
+    });
   }
   setIsLog(st: boolean): void {
     if (!st) {

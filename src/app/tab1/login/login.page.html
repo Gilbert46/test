@@ -17,7 +17,7 @@
       <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" [ngClass]="{'ion-invalid': !credentials.controls['adrece'].valid}"></ion-input>
       <div *ngIf="!credentials.controls['adrece'].valid"><ion-note>Dirección es obligatoria</ion-note></div>
       <ion-input fill="solid" type="number" placeholder="entrar teléfono" formControlName="phone" [ngClass]="{'ion-invalid': !credentials.controls['phone'].valid}"></ion-input>
-      <div *ngIf="!credentials.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>
+    <div *ngIf="!credentials.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>
     </div>
     <br/><br/>
     <div [hidden]="isLog[0]">
@@ -29,6 +29,12 @@
 	</form>
   <br/><br/>
   <ion-text (click)="setIsLog(!isLog[0])">{{  msgAction }}</ion-text>
+  <br/><br/>
+  <div *ngIf="!credentials.controls['email'].invalid">
+    <ion-text (click)="resetPassword(credentials.controls['email'].value, credentials.controls['password'].value)">Has olvidado la contraseña?</ion-text>
+  </div>
+  <br/><br/>
+  <ion-text (click)="shareApp()">compartir la aplicación PUZZLE-POP...</ion-text>
   <br/><br/>
   <div *ngIf="isLog[1]">
     <ion-note>Usuario no válido, alguno de los campos no es correcto</ion-note>

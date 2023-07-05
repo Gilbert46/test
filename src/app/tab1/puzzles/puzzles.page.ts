@@ -5,6 +5,9 @@ import { AuthService } from '../../services/auth.service';
 import { Puzzle } from '../../interfaces/puzzle';
 import { PuzzleService } from '../../services/puzzle.service';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
+//import { Plugins } from '@capacitor/core';
+//const { share } = Plugins;
+import { Share } from '@capacitor/share'
 
 
 @Component({
@@ -56,28 +59,11 @@ export class PuzzlesPage implements OnInit {
     promise.then(() => {
       setTimeout (() => {
         this.sortPuzzle(price, pices, title);
+        this.paginePuzle();
       }, 300);
     });
   }
-  downloadFile(dlimg: string) {
-    this.dlimatgeService.dowmloadImage(dlimg);
-  }
-  sortPuzzle(price: number, pices: number, title: string) {
-    for (let i=0; i<this.puzzles.length; i++) {
-      if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {
-        this.puzzles.splice(i, 1);
-        i--;
-      }
-      else if (title != '') {
-        for (let j=0; j<title.length; j++) {
-          if (this.puzzles[i].titulo.charAt(j).toUpperCase() != title.charAt(j).toUpperCase()) {
-            this.puzzles.splice(i, 1);
-            i--;
-            break;
-          }
-        }
-      }
-    }
+  paginePuzle(): void {
     if (this.puzzles.length > 0) {
       let maxPage = Math.ceil(this.puzzles.length/10)
       for (let e=0; e<maxPage; e++) {
@@ -99,7 +85,31 @@ export class PuzzlesPage implements OnInit {
       }
     }
   }
-  otherPage(n: number):void {
+  downloadFile(dlimg: string):void {
+    //this.dlimatgeService.dowmloadImage(dlimg);
+    //const photo = Camera.getPhoto(dlimg);
+    Share.share({
+      url: dlimg,
+    });
+  }
+  sortPuzzle(price: number, pices: number, title: string) {
+    for (let i=0; i<this.puzzles.length; i++) {
+      if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {
+        this.puzzles.splice(i, 1);
+        i--;
+      }
+      else if (title != '') {
+        for (let j=0; j<title.length; j++) {
+          if (this.puzzles[i].titulo.charAt(j).toUpperCase() != title.charAt(j).toUpperCase()) {
+            this.puzzles.splice(i, 1);
+            i--;
+            break;
+          }
+        }
+      }
+    }
+  }
+  otherPage(n: number): void {
     this.npage = n
     this.getSearchValue()
   }

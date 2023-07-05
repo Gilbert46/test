@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword,createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { getAuth, sendPasswordResetEmail, updatePassword, reauthenticateWithCredential } from "firebase/auth";
 import { Firestore, addDoc, collection, collectionData, doc, docData, updateDoc } from '@angular/fire/firestore';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
@@ -11,7 +13,7 @@ import { User } from '../interfaces/user';
 })
 export class AuthService {
   idx: string = ''
-  constructor(public auth: Auth, private firestore: Firestore, private router: Router) { }
+  constructor(public auth: Auth, private firestore: Firestore, private router: Router, private alertController: AlertController) { }
 
   async register( usuari: User) {
 		try {
@@ -32,6 +34,29 @@ export class AuthService {
 			return null
 		}
 	}
+  async newPassword(email: string, pw: string) {
+    const auth = getAuth()
+    const user = auth.currentUser
+    if (pw.length<6) this.showAlert('ERROR !!!', 'Password almenos con 6 carácteres');
+    else {
+      sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        updatePassword(user!, pw).then(() => {
+          setTimeout (() => {
+            this.router.navigateByUrl('/tab1/home/'+user!.uid, { replaceUrl: true })
+          }, 300);
+        }).catch((error)=> {
+          this.showAlert('ERROR !!!', 'Usuario no registrado');
+        })
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        this.showAlert('ERROR !!!', 'Email no válido');
+      })
+    }
+  }
   getUsers(usuari: User): Observable<User[]> {
     const user = collection(this.firestore, `users`);
 		return collectionData(user, {idField: 'id'}) as Observable<User[]>
@@ -55,6 +80,13 @@ export class AuthService {
 	logout() {
     return signOut(this.auth);
 	}
-
+  async showAlert(head: string, msg: string) {
+    const alert = await this.alertController.create({
+      header: head,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present()
+  }
 
 }
