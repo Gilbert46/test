@@ -5,14 +5,17 @@ import { FormsModule } from '@angular/forms';
 
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
-import { TabsPage } from './tabs.page';
+import { TabsPage } from './tabs.page'
+import { TranslateService } from '@ngx-translate/core'
+import { TranslateModule } from '@ngx-translate/core'
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    TranslateModule
   ],
   declarations: [TabsPage]
 })

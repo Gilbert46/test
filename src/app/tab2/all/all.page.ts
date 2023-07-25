@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Puzzle } from '../../interfaces/puzzle';
 import { PuzzleService } from '../../services/puzzle.service';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-all',
@@ -15,7 +17,7 @@ export class AllPage implements OnInit {
   columne: number = 6
   blPages: boolean[] = []
   flag: boolean[] = [false, false, false]
-  puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:''}
+  puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:'',alto:0,ancho:0,ano:0,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:'',id:''}
   puzzles : Puzzle[] = []
 
   ngOnInit(): void {
@@ -23,16 +25,19 @@ export class AllPage implements OnInit {
     this.npage = 0;
     this.getSearchValue();
   }
+
   getSearchValue(): void {
     let p = document.getElementById('pricePice')! as HTMLOptionElement;
     let n = document.getElementById('numberPice')! as HTMLOptionElement;
     let t = document.getElementById('searchTitle')! as HTMLInputElement;
     this.initPuzzle(parseInt(p.value), parseInt(n.value), t.value.toString())
   }
+
   async initPuzzle(price:number, pices:number, title:string) {
     this.puzzleService.getPuzzles().subscribe(res => {this.puzzles = this.orderTitle(res);})
     this.stepSort(price, pices, title)
   }
+
   async stepSort(price:number, pices:number, title:string) {
     const promise = new Promise ((resolve, reject) => {resolve(123)})
     promise.then(() => {
@@ -42,6 +47,7 @@ export class AllPage implements OnInit {
       }, 300);
     });
   }
+
   paginePuzle(): void {
     let maxPage = Math.ceil(this.puzzles.length/10)
     if (maxPage < 1) this.blPages[0]=true
@@ -64,11 +70,13 @@ export class AllPage implements OnInit {
       }
     }
   }
+
   detallPuzzle(idx: number) : void {
     this.flag[0] = true
-    this.puzzle = {marca:this.puzzles[idx].marca,titulo:this.puzzles[idx].titulo,categoria:this.puzzles[idx].categoria, precio:this.puzzles[idx].precio,piezas:this.puzzles[idx].piezas,propietario:this.puzzles[idx].propietario,filepath:this.puzzles[idx].filepath,webviewPath:this.puzzles[idx].webviewPath}
+    this.puzzle = {marca:this.puzzles[idx].marca,titulo:this.puzzles[idx].titulo,categoria:this.puzzles[idx].categoria,precio:this.puzzles[idx].precio,piezas:this.puzzles[idx].piezas,propietario:this.puzzles[idx].propietario,filepath:this.puzzles[idx].filepath,webviewPath:this.puzzles[idx].webviewPath,alto:0,ancho:0,ano:0,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:'',id:''}
     this.index = idx;
   }
+
   changeState(st: boolean, idx: number, incr: number): void {
     this.flag[0] = st
     this.flag[1] = false
@@ -82,9 +90,11 @@ export class AllPage implements OnInit {
       this.detallPuzzle(idx)
     }
   }
+
   setIsMenu(st: boolean): void {
     this.flag[1] = st;
   }
+
   playPuzzle(idx:number): void {
       this.flag[1] = false
       this.flag[2] = false
@@ -99,6 +109,7 @@ export class AllPage implements OnInit {
         }
       }, 3000);
   }
+
   urlFile(path: Puzzle, i: number): void {
     this.flag[1] = false;
     if (i == 0) this.dlimatgeService.dowmloadImage(this.puzzle.webviewPath)
@@ -106,6 +117,7 @@ export class AllPage implements OnInit {
     if (i == 2) window.location.href= 'https://www.google.com/intl/es/gmail/about/'
     if (i == 3) window.location.href= 'https://twitter.com/'*/
   }
+
   sortPuzzle(price: number, pices: number, title: string): void {
     for (let i=0; i<this.puzzles.length; i++) {
       if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {
@@ -123,10 +135,12 @@ export class AllPage implements OnInit {
       }
     }
   }
+
   otherPage(n: number):void {
     this.npage = n
     this.getSearchValue()
   }
+
   orderTitle(puzzles2: Puzzle[]): Puzzle[] {
     for (let i=0; i < puzzles2.length - 1; i++) {
       for (let j=i+1; j < puzzles2.length; j++) {
@@ -156,6 +170,7 @@ export class AllPage implements OnInit {
     }
     return puzzles2;
   }
+
   subrrutine(puzzles2: Puzzle[], j: number): Puzzle {
     let puzzle2: Puzzle = {
       marca: puzzles2[j].marca,
@@ -165,9 +180,16 @@ export class AllPage implements OnInit {
       piezas: puzzles2[j].piezas,
       propietario: puzzles2[j].propietario,
       filepath: puzzles2[j].filepath,
-      webviewPath: puzzles2[j].webviewPath
+      webviewPath: puzzles2[j].webviewPath,
+      alto: puzzles2[j].alto,
+      ancho: puzzles2[j].ancho,
+      ano: puzzles2[j].ano,
+      condicion: puzzles2[j].condicion,
+      estado: puzzles2[j].estado,
+      localizacion: puzzles2[j].localizacion
     }
     return puzzle2;
   }
 
 }
+

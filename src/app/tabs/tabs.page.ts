@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 import { AuthService } from '../services/auth.service'
+import { TranslateService } from '@ngx-translate/core'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-tabs',
@@ -7,13 +9,15 @@ import { AuthService } from '../services/auth.service'
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private translate: TranslateModule) {}
   cadena: string = 'tab1/login'
-  btTab1?: boolean;
+  btTab1?: boolean
 
   setBtTab1(st: boolean): void {
     this.btTab1 = st;
-    if (st) this.cadena = 'tab1/home/'+this.authService.auth;
+    if (st) this.cadena = 'tab1/home/'+this.authService.auth
     else this.cadena = 'tab1/login'
   }
+
 }
+

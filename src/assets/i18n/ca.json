@@ -1,0 +1,111 @@
+{
+  "TABS": {
+    "TAB1": {
+      "TXT": "Començar / Registra't"
+    },
+    "TAB2": {
+      "TXT": "Tots els trencaclosques"
+    },
+    "TAB3": {
+      "TXT": "Entreteniments"
+    }
+  },
+  "LOGIN":  {
+    "TITLE": {
+      "LOGIN": "Començar / Registra't"
+    },
+    "EMAIL": {
+      "PLACEHOLDER": "introduïr correu electrònic"
+    },
+    "ERROREMAIL": {
+      "TEXT": "Email no és vàlid"
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "introduïr contrasenya"
+    },
+    "ERRORPASSWORD": {
+      "TEXT": "Contrasenya necessita mínim 6 caràcters"
+    },
+    "NAME": {
+      "PLACEHOLDER": "introduïr nom sencer"
+    },
+    "ERRORNAME": {
+      "TEXT": "Nom és obligatory"
+    },
+    "ADRECE": {
+      "PLACEHOLDER": "introduïr adreça"
+    },
+    "ERRORADRECE": {
+      "TEXT": "Adreça és obligatoria"
+    },
+    "PHONE": {
+      "PLACEHOLDER": "introduïr telèfon"
+    },
+    "ERRORPHONE": {
+      "TEXT": "Telefòn ha de ser numèric"
+    },
+    "SUMIT": {
+      "TEXT": "Començar-hi"
+    },
+    "BUTTON": {
+      "TEXT": "Registrar-se"
+    },
+    "TEXT_1": {
+      "TXT": "msgAction"
+    },
+    "TEXT_2": {
+      "TXT": "Has olvidat la contrassenya?"
+    },
+    "TEXT_3": {
+      "TXT": "compartir l'aplicació PUZZLE-POP..."
+    },
+    "TEXT_4": {
+      "TXT": "Usuari no vàlid, alguns dels camps no es correcte"
+    }
+  },
+  "ALL": {
+    "TITLE": {
+      "ALL": "Tots els trencaclosques"
+    },
+    "SELECT": {
+      "OPTION1": " cercar per peces ",
+      "OPTION2": " entre 2000 i 2500 u",
+      "OPTION3": " entre 1500 i 2000 u",
+      "OPTION4": " entre 1000 i 1500 u",
+      "OPTION5": " enntre 500 i 1000 u",
+      "OPTION6": " fins 500 u"
+    },
+    "SELECT2": {
+      "OPTION1": "  cercar per preus ",
+      "OPTION2": " fins 50 €",
+      "OPTION3": " fins 40 €",
+      "OPTION4": " fins 30 €",
+      "OPTION5": " fins 20 €",
+      "OPTION6": " fins 10 €"
+    },
+    "SHEARCH": {
+      "TITLE": "cercar el títol del entrecaclosques..."
+    },
+    "ZERO": {
+      "TITLE": "No s'ha trobat cap trencaclosques..."
+    },
+    "CARD": {
+      "PARAF1": "marca comercial: ",
+      "PARAF2": "categoria temàtica: ",
+      "PARAF3": "preu aproximat: ",
+      "PARAF4": "nombre de peces: ",
+      "PARAF5": "propietari: ",
+      "PARAF6": "Alçada: ",
+      "PARAF7": "Amplada: ",
+      "PARAF8": "Any: ",
+      "PARAF9": "Condició: ",
+      "PARAF10": "Estat: ",
+      "PARAF11": "Localització: "
+    }
+  },
+  "TIME": {
+    "TITLE": {
+      "TXT": "Joc"
+    }
+  }
+}

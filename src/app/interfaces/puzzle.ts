@@ -9,13 +9,13 @@ export interface Puzzle {
   webviewPath: string,
   alto?: number,
   ancho?: number,
-  año?: number,
+  ano?: number,
   condicion?: string,
   estado?: string,
   privado?: boolean,
-  comentario?: string,
   userid?: string,
   localizacion?: string,
+  comentario?: string,
   id?: string
 }
 

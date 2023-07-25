@@ -35,6 +35,7 @@ const routes: Routes = [
     redirectTo: '/tab1/login',
     pathMatch: 'full'
   }
+
 ];
 @NgModule({
   imports: [

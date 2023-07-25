@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ 'TIME.TITLE.TXT' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="time">
+    <ion-text id="time">{{ time }}</ion-text>
+  </div>
+  <ion-header class="header">
+    <ion-button (click)="startGame()"><ion-icon aria-hidden="true" size="large" name="play-outline"></ion-icon></ion-button>
+    <ion-button (click)="endGame()"><ion-icon aria-hidden="true" size="large" color="danger" name="arrow-redo-outline"></ion-icon></ion-button>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="peces" size="3" *ngFor="let caseta of casetes; index as i">
+        <div>
+          <ion-img [src]="caseta" height="200"></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

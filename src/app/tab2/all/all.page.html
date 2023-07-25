@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Todos los puzzles</ion-title>
+    <ion-title>{{ 'ALL.TITLE.ALL' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,24 +9,24 @@
     <div class="search">
       <div class="select">
         <select id="numberPice" (change)="getSearchValue()">
-          <option value="99999999"> buscar por piezas</option>
-          <option value="2500"> entre 2000 y 2500 u</option>
-          <option value="2000"> entre 1500 y 2000 u</option>
-          <option value="1500"> entre 1000 y 1500 u</option>
-          <option value="1000"> enntre 500 y 1000 u</option>
-          <option value="500"> hasta 500 u</option>
+          <option value="99999999">{{ 'ALL.SELECT.OPTION1' | translate }}</option>
+          <option value="2500">{{ 'ALL.SELECT.OPTION2' | translate }}</option>
+          <option value="2000">{{ 'ALL.SELECT.OPTION3' | translate }}</option>
+          <option value="1500">{{ 'ALL.SELECT.OPTION4' | translate }}</option>
+          <option value="1000">{{ 'ALL.SELECT.OPTION5' | translate }}</option>
+          <option value="500">{{ 'ALL.SELECT.OPTION6' | translate }}</option>
         </select>
         <select id="pricePice" (change)="getSearchValue()">
-          <option value="99999999">  buscar por precio</option>
-          <option value="50"> hasta 50 €</option>
-          <option value="40"> hasta 40 €</option>
-          <option value="30"> hasta 30 €</option>
-          <option value="20"> hasta 20 €</option>
-          <option value="10"> hasta 10 €</option>
+          <option value="99999999">{{ 'ALL.SELECT2.OPTION1' | translate }}</option>
+          <option value="50">{{ 'ALL.SELECT2.OPTION2' | translate }}</option>
+          <option value="40">{{ 'ALL.SELECT2.OPTION3' | translate }}</option>
+          <option value="30">{{ 'ALL.SELECT2.OPTION4' | translate }}</option>
+          <option value="20">{{ 'ALL.SELECT2.OPTION5' | translate }}</option>
+          <option value="10">{{ 'ALL.SELECT2.OPTION6' | translate }}</option>
         </select>
       </div>
       <div class="title">
-        <ion-input type="text" id="searchTitle" placeholder="buscar el titulo del puzzle..." (keyup)="getSearchValue()"></ion-input>
+        <ion-input type="text" id="searchTitle" placeholder="{{ 'ALL.SHEARCH.TITLE' | translate }}" (keyup)="getSearchValue()"></ion-input>
       </div>
     </div>
     <ion-grid>
@@ -39,7 +39,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-title class="zero" *ngIf="puzzles.length <= 0">No se han encontrado puzzles</ion-title>
+    <ion-title class="zero" *ngIf="puzzles.length <= 0">{{ 'ALL.ZERO.TITLE' | translate }}</ion-title>
     <br/><br/>
     <div class="pagination">
       <div class="alinear">
@@ -66,11 +66,17 @@
       <div class="detall">
         <ion-img [src]="puzzle.filepath"></ion-img>
       </div>
-      <p><em>marca comercial:</em> {{ puzzle.marca }}</p>
-      <p><em>categoria temática:</em> {{ puzzle.categoria }} </p>
-      <p><em>precio aproximado:</em> {{ puzzle.precio }} €</p>
-      <p><em>máximo de piezas:</em> {{ puzzle.piezas }} </p>
-      <p><em>propietario:</em> {{ puzzle.propietario }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF1' | translate }}</em>{{ puzzle.marca }}</p>
+      <p><em>{{ 'ALL.CARD.PARAF2' | translate }}</em>{{ puzzle.categoria }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF3' | translate }}</em>{{ puzzle.precio }} €</p>
+      <p><em>{{ 'ALL.CARD.PARAF4' | translate }}</em>{{ puzzle.piezas }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF5' | translate }}</em>{{ puzzle.propietario }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF6' | translate }}</em>{{ puzzle.alto }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF7' | translate }}</em>{{ puzzle.ancho }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF8' | translate }}</em>{{ puzzle.ano }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF9' | translate }}</em>{{ puzzle.condicion }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF10' | translate }}</em>{{ puzzle.estado }} </p>
+      <p><em>{{ 'ALL.CARD.PARAF11' | translate }}</em>{{ puzzle.localizacion }} </p>
     </ion-card>
   </div>
 </ion-content>

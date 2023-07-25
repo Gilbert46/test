@@ -22,7 +22,8 @@ export class NewPage implements OnInit {
   ngOnInit() {
     this.initPage()
   }
-  initPage():void {
+
+  initPage(): void {
     this.puzzleFrom.controls['marca'].setValue('')
     this.puzzleFrom.controls['titulo'].setValue('')
     this.puzzleFrom.controls['categoria'].setValue('')
@@ -75,3 +76,4 @@ export class NewPage implements OnInit {
   }
 
 }
+

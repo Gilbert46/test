@@ -6,7 +6,11 @@ const routes: Routes = [
   {
     path: '',
     component: Tab3Page,
+  },  {
+    path: 'graphics',
+    loadChildren: () => import('./graphics/graphics.module').then( m => m.GraphicsPageModule)
   }
+
 ];
 
 @NgModule({

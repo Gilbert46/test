@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { AllPageRoutingModule } from './all-routing.module';
 
 import { AllPage } from './all.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AllPageRoutingModule
+    AllPageRoutingModule,
+    TranslateModule
   ],
   declarations: [AllPage]
 })
+
 export class AllPageModule {}
+

@@ -17,4 +17,6 @@ import { GraphicPage } from './graphic.page';
   ],
   declarations: [GraphicPage]
 })
+
 export class GraphicPageModule {}
+

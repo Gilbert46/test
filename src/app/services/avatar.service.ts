@@ -19,8 +19,8 @@ export class AvatarService {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       quality: 90,
-      height: 100,
-      width: 100,
+      height: 80,
+      width: 80,
       correctOrientation: true,
       allowEditing: true
     })
@@ -42,6 +42,7 @@ export class AvatarService {
     const blob = await response.blob();
     return await this.convertBlobToBase64(blob) as string;
   }
+
   private convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;
@@ -63,4 +64,5 @@ export class AvatarService {
       })
     })
   }
+
 }

@@ -20,4 +20,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   declarations: [Home1Page],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class HomePageModule {}
+

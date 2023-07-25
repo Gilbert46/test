@@ -18,4 +18,7 @@ import { UserPage } from './user.page';
   ],
   declarations: [UserPage]
 })
+
 export class UserPageModule {}
+
+

@@ -1,0 +1,111 @@
+{
+  "TABS": {
+    "TAB1": {
+      "TXT": "Entrar / Registrarse"
+    },
+    "TAB2": {
+      "TXT": "Todos los puzles"
+    },
+    "TAB3": {
+      "TXT": "Entretenimientos"
+    }
+  },
+  "LOGIN": {
+    "TITLE": {
+      "LOGIN": "Entrar / registrarse"
+    },
+    "EMAIL": {
+      "PLACEHOLDER": "entrar correo electrónico"
+    },
+    "ERROREMAIL": {
+      "TEXT": "Email no es válido"
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "entrar contraseña"
+    },
+    "ERRORPASSWORD": {
+      "TEXT": "Contraseña necesitas mínimo 6 carácteres"
+    },
+    "NAME": {
+      "PLACEHOLDER": "entrar nombre completo"
+    },
+    "ERRORNAME": {
+      "TEXT": "Nombre es obligatorio"
+    },
+    "ADRECE": {
+      "PLACEHOLDER": "entrar dirección"
+    },
+    "ERRORADRECE": {
+      "TEXT": "Dirección es obligatoria"
+    },
+    "PHONE": {
+      "PLACEHOLDER": "entrar teléfono"
+    },
+    "ERRORPHONE": {
+      "TEXT": "Teléfono no ha de ser numérico"
+    },
+    "SUMIT": {
+      "TEXT": "Entar"
+    },
+    "BUTTON": {
+      "TEXT": "Registrarse"
+    },
+    "TEXT_1": {
+      "TXT": "msgAction"
+    },
+    "TEXT_2": {
+      "TXT": "¿Has olvidado la contraseña?"
+    },
+    "TEXT_3": {
+      "TXT": "compartir la aplicación PUZZLE-POP..."
+    },
+    "TEXT_4": {
+      "TXT": "Usuario no válido, alguno de los campos no es correcto"
+    }
+  },
+  "ALL": {
+    "TITLE": {
+      "ALL": "Todos los puzles"
+    },
+    "SELECT": {
+      "OPTION1": " buscar por piezas ",
+      "OPTION2": " entre 2000 y 2500 u",
+      "OPTION3": " entre 1500 y 2000 u",
+      "OPTION4": " entre 1000 y 1500 u",
+      "OPTION5": " enntre 500 y 1000 u",
+      "OPTION6": " hasta 500 u"
+    },
+    "SELECT2": {
+      "OPTION1": "  buscar por precio ",
+      "OPTION2": " hasta 50 €",
+      "OPTION3": " hasta 40 €",
+      "OPTION4": " hasta 30 €",
+      "OPTION5": " hasta 20 €",
+      "OPTION6": " hasta 10 €"
+    },
+    "SHEARCH": {
+      "TITLE": "buscar el título del puzle..."
+    },
+    "ZERO": {
+      "TITLE": "No se han encontrado puzles"
+    },
+    "CARD": {
+      "PARAF1": "marca comercial: ",
+      "PARAF2": "categoria temática: ",
+      "PARAF3": "precio aproximado: ",
+      "PARAF4": "número de piezas: ",
+      "PARAF5": "propietario: ",
+      "PARAF6": "Altura: ",
+      "PARAF7": "Ancho: ",
+      "PARAF8": "Año: ",
+      "PARAF9": "Condición: ",
+      "PARAF10": "Estado: ",
+      "PARAF11": "Localización: "
+    }
+  },
+  "TIME": {
+    "TITLE": {
+      "TXT": "Juego"
+    }
+  }
+}

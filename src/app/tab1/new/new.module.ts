@@ -18,4 +18,6 @@ import { NewPage } from './new.page';
   ],
   declarations: [NewPage]
 })
+
 export class NewPageModule {}
+

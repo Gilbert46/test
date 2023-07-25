@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "339792797704",
+    "project_id": "puzzle-21pop",
+    "storage_bucket": "puzzle-21pop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339792797704:android:fcf05dfd5a691d841771bd",
+        "android_client_info": {
+          "package_name": "app2.Android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339792797704-497qrdnp8fl03uun90i8o2ev2he2mipr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRyKDE6s5HrL-M7V0NscC2yZguqx5OUok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339792797704-497qrdnp8fl03uun90i8o2ev2he2mipr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339792797704:android:841d3798058325581771bd",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339792797704-497qrdnp8fl03uun90i8o2ev2he2mipr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRyKDE6s5HrL-M7V0NscC2yZguqx5OUok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339792797704-497qrdnp8fl03uun90i8o2ev2he2mipr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

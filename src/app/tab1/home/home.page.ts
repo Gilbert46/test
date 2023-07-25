@@ -5,6 +5,9 @@ import { User } from '../../interfaces/user';
 import { TabsPage } from '../../tabs/tabs.page';
 import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
+//import { PushService } from 'src/app/services/push.service';
+import { Geolocation } from '@capacitor/geolocation';
+import { MapsService } from 'src/app/services/maps.service';
 
 
 @Component({
@@ -12,62 +15,82 @@ import { environment } from 'src/environments/environment';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
+
 export class Home1Page implements OnInit {
   user: User={email:'',password:'',name:'',adrece:'',phone:'',id:'',filepath:'',webviewPath:''}
-  constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage) {}
+  constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage, private mapsService: MapsService/*, public pushService: PushService*/ ) {}
+  localition = { lat: 52, lng: 1.25}
+  map!: google.maps.Map
+  dades: any
 
   ngOnInit(): void {
     this.tabsPage.setBtTab1(true)
     this.initUser()
+    //this.pushService.init()
   }
   async initUser() {
     const idField = String(this.authService.idx);
-    this.authService.getUsuari(idField).subscribe(res => {this.user={email:res.email,password:res.password,name:res.name,adrece:res.adrece,phone:res.phone,id:res.id,filepath:res.filepath, webviewPath:res.webviewPath};});
+    this.authService.getUsuari(idField).subscribe(res => {this.user={email:res.email,password:res.password,name:res.name,adrece:res.adrece,phone:res.phone,id:res.id,filepath:res.filepath, webviewPath:res.webviewPath};})
+    this.dades = await this.geolocUser()
     this.sincronMap()
   }
-
+  async geolocUser() {
+    const coordinates = await Geolocation.getCurrentPosition()
+    return coordinates
+  }
   async sincronMap() {
     const promise=new Promise((resolve, reject) => {resolve(123)})
     promise.then(() => {
       setTimeout(() => {
         this.createMap()
-      },500)
+      }, 500)
     })
+  }
+  searchMaps(adress: string): void {
+    try {
+      this.mapsService.getCoordinatesByAddress(adress).subscribe((res: any) => {
+          if (res.results[0]) {
+              this.localition = res.results[0].geometry.location
+              this.initMap()
+          }
+      });
+    } catch(err) {
+      console.log(err);
+
+    }
+  }
+  async initMap() {
+    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom:15,center:this.localition})
+    const marker = new google.maps.Marker({position:this.localition, map:this.map, animation:google.maps.Animation.BOUNCE})
+    const service = new google.maps.places.PlacesService(this.map)
   }
   async createMap() {
     const mapRef = document.getElementById('map')!;
-    const newMap = await GoogleMap.create({
-      id: 'my-map',
-      element: mapRef,
-      apiKey: environment.firebase.apiKey,
-      config: {
-        center: {lat: 41.4,lng: 2.05},
-        zoom: 8,
-      },
-    });
+    const newMap = await GoogleMap.create({id: 'my-map', element: mapRef, apiKey: environment.firebase.apiKey,
+      config: {center: {lat: this.dades.coords.latitude, lng :this.dades.coords.longitude},zoom: 15,},
+    })
     const markerId = await newMap.addMarker({
-      coordinate: {
-        lat: 41.4,
-        lng: 2.05
-      }
-    });
+      coordinate: {lat: this.dades.coords.latitude,lng: this.dades.coords.longitude}
+    })
     await newMap.setCamera({
-      coordinate: {
-        lat: 41.4,
-        lng: 2.05
-      }
-    });
+      coordinate: {lat: this.dades.coords.latitude,lng: this.dades.coords.longitude}
+    })
     await newMap.enableClustering();
   }
+
   optionMenu(n: number): void {
     if (n == 1) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true })
     if (n == 2) this.router.navigateByUrl('/tab1/new/'+this.authService.auth, { replaceUrl: true })
     if (n == 3) this.router.navigateByUrl('/tab1/graphic/'+this.authService.auth, { replaceUrl: true })
     if (n == 4) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true })
   }
+
   LogOut(): void {
     this.tabsPage.setBtTab1(false)
     this.router.navigateByUrl('/tab1/login', { replaceUrl: true })
     this.authService.logout()
   }
+
 }
+
+

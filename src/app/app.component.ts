@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
+import { TranslateService } from '@ngx-translate/core';
 //import { readFileSync } from 'fs';
 //import { parse } from 'querystring';
 
@@ -9,7 +10,10 @@ import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('es');
+    translate.use('es');
+  }
   hidden: boolean = false
   time: boolean[] = [true, true, true, true, true]
 

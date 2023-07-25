@@ -1,42 +1,54 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Entrar/Registrarse</ion-title>
-  </ion-toolbar>
+    <div class="header">
+      <ion-title>{{ "LOGIN.TITLE.LOGIN" | translate }}</ion-title>
+      <div [hidden]="isLog[2]">
+        <ion-button (click)="setFlag(true)"><ion-icon aria-hidden="true" color="warning" name="language"></ion-icon></ion-button>
+      </div>
+      <div [hidden]="!isLog[2]">
+        <select (change)="setFlag(false)" id="select">
+          <option value="es" id="option">ESPAÑOL</option>
+          <option value="ca" id="option">CATALÀ</option>
+          <option value="en" id="option">ENGLISH</option>
+        </select>
+      </div>
+    </div>
+    </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
 	<form [formGroup]="credentials" (ngSubmit)="login()">
-    <ion-input fill="solid" type="email" placeholder="entrar correo electrónico" formControlName="email" [ngClass]="{'ion-invalid': credentials.controls['email'].invalid}"></ion-input>
-    <div *ngIf="credentials.controls['email'].invalid"><ion-note>Email no es valido</ion-note></div>
-    <ion-input fill="solid" type="password" placeholder="entrar contraseña" formControlName="password" [ngClass]="{'ion-invalid': credentials.controls['password'].invalid}"></ion-input>
-    <div *ngIf="credentials.controls['password'].invalid"><ion-note>Password necesitas mínimo 6 carácteres</ion-note></div>
+    <ion-input fill="solid" type="email" placeholder="{{ 'LOGIN.EMAIL.PLACEHOLDER' | translate }}" formControlName="email" [ngClass]="{'ion-invalid': credentials.controls['email'].invalid}"></ion-input>
+    <div *ngIf="credentials.controls['email'].invalid"><ion-note>{{ 'LOGIN.ERROREMAIL.TEXT' | translate }}</ion-note></div>
+    <ion-input fill="solid" type="password" placeholder="{{ 'LOGIN.PASSWORD.PLACEHOLDER' | translate }}" formControlName="password" [ngClass]="{'ion-invalid': credentials.controls['password'].invalid}"></ion-input>
+    <div *ngIf="credentials.controls['password'].invalid"><ion-note>{{ 'LOGIN.ERRORPASSWORD.TEXT' | translate }}</ion-note></div>
     <div [hidden]="!isLog[0]">
       <!--<ion-input fill="solid" type="password" placeholder="entrar contraseña" formControlName="password2" [ngClass]="{'ion-invalid': credentials.controls['password2'].invalid}"></ion-input>
       <div *ngIf="credentials.controls['password2'].invalid"><ion-note>Password igual al anterior</ion-note></div>-->
-      <ion-input fill="solid" type="text" placeholder="entrar nombre completo" formControlName="name" [ngClass]="{'ion-invalid': !credentials.controls['name'].valid}"></ion-input>
-      <div *ngIf="!credentials.controls['name'].valid"><ion-note>Nombre es obligatorio</ion-note></div>
-      <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" [ngClass]="{'ion-invalid': !credentials.controls['adrece'].valid}"></ion-input>
-      <div *ngIf="!credentials.controls['adrece'].valid"><ion-note>Dirección es obligatoria</ion-note></div>
-      <ion-input fill="solid" type="number" placeholder="entrar teléfono" formControlName="phone" [ngClass]="{'ion-invalid': !credentials.controls['phone'].valid}"></ion-input>
-    <div *ngIf="!credentials.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>
+      <ion-input fill="solid" type="text" placeholder="{{ 'LOGIN.NAME.PLACEHOLDER' | translate }}" formControlName="name" [ngClass]="{'ion-invalid': !credentials.controls['name'].valid}"></ion-input>
+      <div *ngIf="!credentials.controls['name'].valid"><ion-note>{{ 'LOGIN.ERRORNAME.TEXT' | translate }}</ion-note></div>
+      <ion-input fill="solid" type="text" placeholder="{{ 'LOGIN.ADRECE.PLACEHOLDER' | translate }}" formControlName="adrece" [ngClass]="{'ion-invalid': !credentials.controls['adrece'].valid}"></ion-input>
+      <div *ngIf="!credentials.controls['adrece'].valid"><ion-note>{{ 'LOGIN.ERRORADRECE.TEXT' | translate }}</ion-note></div>
+      <ion-input fill="solid" type="number" placeholder="{{ 'LOGIN.PHONE.PLACEHOLDER' | translate }}" formControlName="phone" [ngClass]="{'ion-invalid': !credentials.controls['phone'].valid}"></ion-input>
+    <div *ngIf="!credentials.controls['phone'].valid"><ion-note>{{ 'LOGIN.ERRORPHONE.TEXT' | translate }}</ion-note></div>
     </div>
     <br/><br/>
     <div [hidden]="isLog[0]">
-      <ion-button type="submit" [disabled]="!credentials.valid">Entrar</ion-button>
+      <ion-button type="submit" [disabled]="!credentials.valid">{{ 'LOGIN.SUMIT.TEXT' | translate }}</ion-button>
     </div>
 		<div [hidden]="!isLog[0]">
-      <ion-button type="button" [disabled]="!credentials.valid" (click)="register()">Registrarse</ion-button>
+      <ion-button type="button" [disabled]="!credentials.valid" (click)="register()">{{ 'LOGIN.BUTTON.TEXT' | translate }}</ion-button>
     </div>
 	</form>
   <br/><br/>
-  <ion-text (click)="setIsLog(!isLog[0])">{{  msgAction }}</ion-text>
+  <ion-text (click)="setIsLog(!isLog[0], nLeg)">{{ msgAction[nLeg] }}</ion-text>
   <br/><br/>
-  <div *ngIf="!credentials.controls['email'].invalid">
-    <ion-text (click)="resetPassword(credentials.controls['email'].value, credentials.controls['password'].value)">Has olvidado la contraseña?</ion-text>
-  </div>
+  <!--<div *ngIf="!credentials.controls['email'].invalid">
+    <ion-text (click)="resetPassword(credentials.controls['email'].value, credentials.controls['email'].value)">{{ "LOGIN.TEXT_2.TXT" | translate }}</ion-text>
+  </div>-->
   <br/><br/>
-  <ion-text (click)="shareApp()">compartir la aplicación PUZZLE-POP...</ion-text>
+  <ion-text (click)="shareApp()">{{ "LOGIN.TEXT_3.TXT" | translate }}</ion-text>
   <br/><br/>
   <div *ngIf="isLog[1]">
-    <ion-note>Usuario no válido, alguno de los campos no es correcto</ion-note>
+    <ion-note>{{ "LOGIN.TEXT_4.TXT" | translate }}</ion-note>
   </div>
 </ion-content>

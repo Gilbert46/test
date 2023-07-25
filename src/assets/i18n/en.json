@@ -1,0 +1,108 @@
+{
+  "TABS": {
+    "TAB1": {
+      "TXT": "Go On / Registred"
+    },
+    "TAB2": {
+      "TXT": "All puzzles"
+    },
+    "TAB3": {
+      "TXT": "Time Step"
+    }
+  },
+  "LOGIN":  {
+    "TITLE": {
+      "LOGIN": "Go On / Registred"
+    },
+    "EMAIL": {
+      "PLACEHOLDER": "into electronic mail"
+    },
+    "ERROREMAIL": {
+      "TEXT": "Email isn't valid"
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "into password"
+    },
+    "ERRORPASSWORD": {
+      "TEXT": "Only password with 6 caracter"
+    },
+    "NAME": {
+      "PLACEHOLDER": "into integer name"
+    },
+    "ERRORNAME": {
+      "TEXT": "Name is obligatory"
+    },
+    "ADRECE": {
+      "PLACEHOLDER": "into adrece"
+    },
+    "ERRORADRECE": {
+      "TEXT": "Adrece is obligatory"
+    },
+    "PHONE": {
+      "PLACEHOLDER": "into phone"
+    },
+    "ERRORPHONE": {
+      "TEXT": "Phone haven't to be alfaphetic"
+    },
+    "SUMIT": {
+      "TEXT": "Go On"
+    },
+    "BUTTON": {
+      "TEXT": "Registred"
+    },
+    "TEXT_2": {
+      "TXT": "You'he forget your password?"
+    },
+    "TEXT_3": {
+      "TXT": "shearch aplication PUZZLE-POP..."
+    },
+    "TEXT_4": {
+      "TXT": "User isn't valid, any row isn't correct"
+    }
+  },
+  "ALL": {
+    "TITLE": {
+      "ALL": "All puzzles"
+    },
+    "SELECT": {
+      "OPTION1": " shearch for piece ",
+      "OPTION2": " before 2000 & 2500 u",
+      "OPTION3": " before 1500 & 2000 u",
+      "OPTION4": " before 1000 & 1500 u",
+      "OPTION5": " before 500 & 1000 u",
+      "OPTION6": " undo 500 u"
+    },
+    "SELECT2": {
+      "OPTION1": "  shearch for price ",
+      "OPTION2": " undo 50 €",
+      "OPTION3": " und0 40 €",
+      "OPTION4": " undo 30 €",
+      "OPTION5": " undo 20 €",
+      "OPTION6": " undo 10 €"
+    },
+    "SHEARCH": {
+      "TITLE": "shearch for title of the puzzle..."
+    },
+    "ZERO": {
+      "TITLE": "There's not puzzles"
+    },
+    "CARD": {
+      "PARAF1": "company: ",
+      "PARAF2": "category: ",
+      "PARAF3": "price: ",
+      "PARAF4": "piece: ",
+      "PARAF5": "proprety: ",
+      "PARAF6": "hight: ",
+      "PARAF7": "width: ",
+      "PARAF8": "Age: ",
+      "PARAF9": "Condition: ",
+      "PARAF10": "State: ",
+      "PARAF11": "Localitzation:"
+    }
+  },
+  "TIME": {
+    "TITLE": {
+      "TXT": "Game"
+    }
+  }
+}
