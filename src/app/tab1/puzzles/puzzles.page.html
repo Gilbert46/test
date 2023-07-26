@@ -88,7 +88,7 @@
         <ion-input fill="solid" type="text" placeholder="entrar estado del puzzle" formControlName="estado" [ngClass]="{'ion-invalid':!puzzleForm.controls['estado'].valid}"></ion-input>
         <ion-input fill="solid" type="text" placeholder="entrar comentario del puzzle" formControlName="comentario" [ngClass]="{'ion-invalid':!puzzleForm.controls['comentario'].valid}"></ion-input>
         <div #divMap style="width:94%; height:390px; margin: 1px auto" id="divMap"></div>
-        <ion-input fill="solid" type="text" placeholder="entrar localización del puzzle" formControlName="localizacion" [ngClass]="{'ion-invalid':!puzzleForm.controls['localizacion'].valid}"></ion-input>
+        <ion-input fill="solid" type="text" placeholder="entrar localización del puzzle" formControlName="localizacion" (keyup)="searchMaps(puzzleForm.controls['localizacion'].value)" [ngClass]="{'ion-invalid':!puzzleForm.controls['localizacion'].valid}"></ion-input>
         <div class="buttons">
           <div class="flex">
             <ion-button type="submit" [disabled]="!puzzleForm.valid"><ion-icon size="large" color="success" name="checkmark-circle"></ion-icon></ion-button>
