@@ -32,7 +32,7 @@ export class PuzzlesPage implements OnInit {
   flag: boolean[] = [false, false, false]
   puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:'',alto:0,ancho:0,ano:2020,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:'',id:''}
   puzzles : Puzzle[] = []
-  puzzleForm: FormGroup  = new FormGroup({marca:new FormControl({value:'', disabled:this.flag[2]},[Validators.required,Validators.minLength(3)]),titulo:new FormControl({value:'', disabled:this.flag[2]},[Validators.required, Validators.minLength(3)]),categoria:new FormControl({value:'', disabled:this.flag[2]},[Validators.required, Validators.minLength(3)]),precio:new FormControl({value:'', disabled:this.flag[2]},[Validators.required,Validators.minLength(1)]),piezas:new FormControl({value:'', disabled:this.flag[2]},[Validators.required,Validators.minLength(1)]),propietario:new FormControl({value:'', disabled:this.flag[2]},[Validators.required,Validators.minLength(3)]),filepath:new FormControl({value:'', disabled:this.flag[2]}),webviewPath:new FormControl({value:'', disabled:this.flag[2]}),alto:new FormControl({value:'', disabled:this.flag[2]}),ancho:new FormControl({value:'', disabled:this.flag[2]}),ano:new FormControl({value:'', disabled:this.flag[2]}),condicion:new FormControl({value:'', disabled:this.flag[2]}),estado: new FormControl({value:'', disabled:this.flag[2]}),privado: new FormControl(),comentario:new FormControl({value:'', disabled:this.flag[2]}),userid:new FormControl(''),localizacion:new FormControl({value:'', disabled:this.flag[2]}),id:new FormControl('')})
+  puzzleForm: FormGroup  = new FormGroup({marca:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(3)]),titulo:new FormControl({value:'', disabled:false},[Validators.required, Validators.minLength(3)]),categoria:new FormControl({value:'', disabled:false},[Validators.required, Validators.minLength(3)]),precio:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),piezas:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),propietario:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(3)]),filepath:new FormControl({value:'', disabled:false}),webviewPath:new FormControl({value:'', disabled:false}),alto:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),ancho:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),ano:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),condicion:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),estado: new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),privado: new FormControl(),comentario:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),userid:new FormControl(''),localizacion:new FormControl({value:'', disabled:false},[Validators.required,Validators.minLength(1)]),id:new FormControl('')})
   localition = {lat: 46, lng: 1.24}
   map!: google.maps.Map;
   dades: any
@@ -154,7 +154,7 @@ export class PuzzlesPage implements OnInit {
     this.puzzleForm.controls['userid'].setValue(this.puzzles[idx].userid)
     this.puzzleForm.controls['localizacion'].setValue(this.puzzles[idx].localizacion)
     this.puzzleForm.controls['id'].setValue(this.puzzles[idx].id)
-    if (!this.flag[2]) {
+    if (!disabled) {
       this.title = 'MODIFICAR PUZLE'
       this.puzzleForm.controls['marca'].enable()
       this.puzzleForm.controls['titulo'].enable()
@@ -288,15 +288,8 @@ export class PuzzlesPage implements OnInit {
     this.initMap();
   }
   async initMap() {
-    this.map = new google.maps.Map(document.getElementById('divMap')!,{
-      zoom: 10,
-      center: this.localition
-    })
-    const marker = new google.maps.Marker({
-      position: this.localition,
-      map: this.map,
-      animation: google.maps.Animation.BOUNCE})
-
+    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom: 15, center: this.localition})
+    const marker = new google.maps.Marker({position: this.localition, map: this.map, animation: google.maps.Animation.BOUNCE})
     const service = new google.maps.places.PlacesService(this.map)
   }
   createMarker(place: any) {
@@ -306,6 +299,10 @@ export class PuzzlesPage implements OnInit {
   async getCurrentPosition() {
     const coordinates = await Geolocation.getCurrentPosition()
     return coordinates
+  }
+  returnList(): void {
+    this.flag[0] = false
+    this.flag[2] = false
   }
 }
 

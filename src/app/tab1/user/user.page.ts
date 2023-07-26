@@ -6,6 +6,13 @@ import { Location } from '@angular/common';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import  { AvatarService } from '../../services/avatar.service';
+import { GoogleMap } from '@capacitor/google-maps';
+import { environment } from 'src/environments/environment';
+import { Geolocation } from '@capacitor/geolocation';
+import { MapsService } from 'src/app/services/maps.service';
+import { Share } from '@capacitor/share'
+import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
+
 
 
 
@@ -16,10 +23,14 @@ import  { AvatarService } from '../../services/avatar.service';
 })
 
 export class UserPage implements OnInit {
-  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router, private location:Location, private alertController:AlertController, private avatarService: AvatarService) { }
+  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router, private location:Location, private alertController:AlertController, private avatarService: AvatarService, private mapsService: MapsService) { }
   imgSt: string = ''
   user: User = {email:'',password:'',name:'',adrece:'',phone:'',id:'',filepath:'',webviewPath:''}
   userForm: FormGroup = new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),password2:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl('',[Validators.required,Validators.minLength(5)]),phone:new FormControl('',[Validators.required,Validators.minLength(8)]),filepath:new FormControl(''),webviewPath:new FormControl('')})
+  localition = {lat: 46, lng: 1.24}
+  map!: google.maps.Map;
+  dades: any
+
   ngOnInit(): void {
     this.initUser()
   }
@@ -41,6 +52,7 @@ export class UserPage implements OnInit {
         this.userForm.controls['filepath'].setValue(this.user.filepath)
         this.userForm.controls['webviewPath'].setValue(this.user.webviewPath)
         this.imgSt=this.userForm.controls['filepath'].value
+        this.searchMaps(this.userForm.controls['adrece'].value)
       },500)
     })
   }
@@ -77,6 +89,38 @@ export class UserPage implements OnInit {
     else if (n == 3) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true })
     else this.location.back()
   }
-
+  searchMaps(adress: string): void {
+    try {
+      this.mapsService.getCoordinatesByAddress(adress).subscribe((res: any) => {
+          if (res.results[0]) {
+            this.localition = res.results[0].geometry.location
+            this.initMap()
+          }
+          else {
+            this.initMapEmptyAdrece()
+          }
+      });
+    } catch(err) {
+      console.log(err)
+    }
+  }
+  createMarker(place: any) {
+    if (!place.geometry || !place.geometry.location) return
+    const marker = new google.maps.Marker({map: this.map,position: place.geometry.location})
+  }
+  async initMapEmptyAdrece() {
+    this.dades = await this.getCurrentPosition()
+    this.localition = { lat: this.dades.coords.latitude, lng: this.dades.coords.longitude}
+    this.initMap();
+  }
+  async getCurrentPosition() {
+    const coordinates = await Geolocation.getCurrentPosition()
+    return coordinates
+  }
+  async initMap() {
+    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom:15,center:this.localition})
+    const marker = new google.maps.Marker({position:this.localition, map:this.map, animation:google.maps.Animation.BOUNCE})
+    const service = new google.maps.places.PlacesService(this.map)
+  }
 }
 

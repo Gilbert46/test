@@ -29,6 +29,7 @@
       <ion-input fill="solid" type="text" placeholder="entrar nombre completo" formControlName="name" [ngClass]="{'ion-invalid': !userForm.controls['name'].valid}"></ion-input>
       <div *ngIf="!userForm.controls['name'].valid"><ion-note>Nombre  necesitas mínimo 5 carácteres</ion-note></div>
       <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" [ngClass]="{'ion-invalid': !userForm.controls['adrece'].valid}"></ion-input>
+      <div #divMap style="width:94%; height:350px; margin: 1px auto" id="divMap"></div>
       <div *ngIf="!userForm.controls['adrece'].valid"><ion-note>Dirección  necesitas mínimo 5 carácteres</ion-note></div>
       <ion-input fill="solid" type="number" placeholder="entrar teléfono" formControlName="phone" [ngClass]="{'ion-invalid': !userForm.controls['phone'].valid}"></ion-input>
       <div *ngIf="!userForm.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>

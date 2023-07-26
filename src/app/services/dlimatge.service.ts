@@ -23,6 +23,7 @@ export class DlimatgeService {
       const savedImageFile = await this.savePicture(blob, folderfile, pathfile); }
       xhr.open('GET', url)
       xhr.send()
+      window.location.href = url
       this.showAlert('¡ FELICIDADES !', 'Descarga efectuada correctament')
     })
     .catch((error) => {

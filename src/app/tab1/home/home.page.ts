@@ -7,7 +7,7 @@ import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 //import { PushService } from 'src/app/services/push.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { MapsService } from 'src/app/services/maps.service';
+//import { MapsService } from 'src/app/services/maps.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { MapsService } from 'src/app/services/maps.service';
 
 export class Home1Page implements OnInit {
   user: User={email:'',password:'',name:'',adrece:'',phone:'',id:'',filepath:'',webviewPath:''}
-  constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage, private mapsService: MapsService/*, public pushService: PushService*/ ) {}
+  constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage/*, public pushService: PushService*/ ) {}
   localition = { lat: 52, lng: 1.25}
   map!: google.maps.Map
   dades: any
@@ -46,24 +46,7 @@ export class Home1Page implements OnInit {
       }, 500)
     })
   }
-  searchMaps(adress: string): void {
-    try {
-      this.mapsService.getCoordinatesByAddress(adress).subscribe((res: any) => {
-          if (res.results[0]) {
-              this.localition = res.results[0].geometry.location
-              this.initMap()
-          }
-      });
-    } catch(err) {
-      console.log(err);
 
-    }
-  }
-  async initMap() {
-    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom:15,center:this.localition})
-    const marker = new google.maps.Marker({position:this.localition, map:this.map, animation:google.maps.Animation.BOUNCE})
-    const service = new google.maps.places.PlacesService(this.map)
-  }
   async createMap() {
     const mapRef = document.getElementById('map')!;
     const newMap = await GoogleMap.create({id: 'my-map', element: mapRef, apiKey: environment.firebase.apiKey,

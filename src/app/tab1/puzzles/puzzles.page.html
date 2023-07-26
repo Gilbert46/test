@@ -65,6 +65,13 @@
   </div>
   <div [hidden]="!flag[0]">
     <div class="ion-context">
+      <div class="buttons">
+        <ion-buttons class="flex">
+          <ion-button (click)="changePage(1)"><ion-icon aria-hidden="true" size="large" color="light" name="play-back-outline"></ion-icon></ion-button>
+          <ion-button (click)="changePage(3)"><ion-icon aria-hidden="true" size="large" color="light" name="play-forward-outline"></ion-icon></ion-button>
+          <ion-button (click)="changePage(2)"><ion-icon aria-hidden="true" size="large" color="warning" name="arrow-redo-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </div>
       <h1>{{ title }}</h1>
       <form [formGroup]="puzzleForm" (ngSubmit)="operationPuzzle()">
         <ion-input fill="solid" type="text" placeholder="entrar marca del puzzle" formControlName="marca" [ngClass]="{'ion-invalid':!puzzleForm.controls['marca'].valid}"></ion-input>
@@ -80,12 +87,12 @@
         <ion-input fill="solid" type="text" placeholder="entrar condición del puzzle" formControlName="condicion" [ngClass]="{'ion-invalid':!puzzleForm.controls['condicion'].valid}"></ion-input>
         <ion-input fill="solid" type="text" placeholder="entrar estado del puzzle" formControlName="estado" [ngClass]="{'ion-invalid':!puzzleForm.controls['estado'].valid}"></ion-input>
         <ion-input fill="solid" type="text" placeholder="entrar comentario del puzzle" formControlName="comentario" [ngClass]="{'ion-invalid':!puzzleForm.controls['comentario'].valid}"></ion-input>
-        <div #divMap style="width:96%; height:400px; margin: 1px auto" id="divMap"></div>
+        <div #divMap style="width:94%; height:390px; margin: 1px auto" id="divMap"></div>
         <ion-input fill="solid" type="text" placeholder="entrar localización del puzzle" formControlName="localizacion" [ngClass]="{'ion-invalid':!puzzleForm.controls['localizacion'].valid}"></ion-input>
         <div class="buttons">
           <div class="flex">
             <ion-button type="submit" [disabled]="!puzzleForm.valid"><ion-icon size="large" color="success" name="checkmark-circle"></ion-icon></ion-button>
-            <ion-button type="button" (click)="changePage(2)"><ion-icon size="large" color="danger" name="close-circle"></ion-icon></ion-button>
+            <ion-button type="button" (click)="returnList()"><ion-icon size="large" color="danger" name="close-circle"></ion-icon></ion-button>
           </div>
         </div>
       </form>
