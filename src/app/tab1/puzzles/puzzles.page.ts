@@ -7,8 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { PuzzleService } from '../../services/puzzle.service';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
 import { PhotoService } from 'src/app/services/photo.service';
-import { GoogleMap } from '@capacitor/google-maps';
-import { environment } from 'src/environments/environment';
+import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { MapsService } from 'src/app/services/maps.service';
 import { Share } from '@capacitor/share';
@@ -22,7 +21,7 @@ import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 })
 export class PuzzlesPage implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private authService: AuthService, private location: Location, private router: Router, private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService, private mapsService: MapsService, private photoService: PhotoService) {}
+  constructor(private formBuilder: FormBuilder,private authService: AuthService, private location: Location, private router: Router, private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService, private mapsService: MapsService, private photoService: PhotoService, private alertController: AlertController) {}
 
   title: string = ''
   idField: string = ''
@@ -49,9 +48,14 @@ export class PuzzlesPage implements OnInit {
     this.getSearchValue()
   }
   changePage(n: number): void {
+    this.flag[0] = false
+    this.flag[2] = false
+    this.photoService.filepath = ''
+    this.photoService.webViewPath = ''
     if (n == 1) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true });
     else if (n == 2) this.router.navigateByUrl('/tab1/home/'+this.authService.auth, { replaceUrl: true });
     else if (n == 3) this.router.navigateByUrl('/tab1/new/'+this.authService.auth, { replaceUrl: true });
+    else if (n == 3) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true });
     else this.location.back();
   }
   getSearchValue(): void {
@@ -85,13 +89,13 @@ export class PuzzlesPage implements OnInit {
     let cont: number = 0
     for (let f=0; f < this.puzzles.length; f++) {
       if (this.npage > 0 && cont < 10 * this.npage) {
-        this.puzzles.splice(f, 1);
-        cont++;
-        f--;
+        this.puzzles.splice(f, 1)
+        cont += 1
+        f -= 1
       }
       if (f >= 10 && this.npage == 0) {
-        this.puzzles.splice(f, 1);
-        f--;
+        this.puzzles.splice(f, 1)
+        f -= 1
       }
     }
   }
@@ -101,15 +105,15 @@ export class PuzzlesPage implements OnInit {
   sortPuzzle(price: number, pices: number, title: string) {
     for (let i=0; i<this.puzzles.length; i++) {
       if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {
-        this.puzzles.splice(i, 1);
-        i--;
+        this.puzzles.splice(i, 1)
+        i -= 1
       }
       else if (title != '') {
         for (let j=0; j<title.length; j++) {
           if (this.puzzles[i].titulo.charAt(j).toUpperCase() != title.charAt(j).toUpperCase()) {
-            this.puzzles.splice(i, 1);
-            i--;
-            break;
+            this.puzzles.splice(i, 1)
+            i -= 1
+            break
           }
         }
       }
@@ -190,13 +194,22 @@ export class PuzzlesPage implements OnInit {
     if (this.photoService.webViewPath != '') this.puzzleForm.controls['webviewPath'].setValue(this.photoService.webViewPath)
   }
   operationPuzzle(): void {
-    if (!this.flag[2]) this.puzzleService.updatePuzzle(this.puzzleForm.value)
-    else this.puzzleService.deletePuzzle(this.puzzleForm.value)
-    this.photoService.filepath = ''
-    this.photoService.webViewPath = ''
-    this.flag[0] = false
-    this.flag[2] = false
-    this.changePage(2)
+    if (!this.flag[2]) {
+      this.puzzleService.updatePuzzle(this.puzzleForm.value)
+      this.showAlert('FELICIDADES !!', 'Puzzle modificado correctamente')
+    }else {
+      this.puzzleService.deletePuzzle(this.puzzleForm.value)
+      this.showAlert('FELICIDADES !!', 'Puzzle eliminado correctamente')
+    }
+  }
+  async showAlert(head: string, msg: string) {
+    const alert = await this.alertController.create({
+      header: head,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present()
+    this.changePage(4)
   }
   orderTitle(puzzles2 : Puzzle[]): Puzzle[] {
     for (let e=0; e<puzzles2.length;e++) {

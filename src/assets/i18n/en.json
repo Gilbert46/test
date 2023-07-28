@@ -45,7 +45,7 @@
       "TEXT": "Phone haves to be numeric"
     },
     "SUMIT": {
-      "TEXT": "Go On"
+      "TEXT": "Start"
     },
     "BUTTON": {
       "TEXT": "Registred"
@@ -54,7 +54,7 @@
       "TXT": "You'he forget your password?"
     },
     "TEXT_3": {
-      "TXT": "shearch aplication PUZZLE-POP..."
+      "TXT": "shearch aplication PUZZLE-21POP..."
     },
     "TEXT_4": {
       "TXT": "User isn't valid, any row isn't correct"

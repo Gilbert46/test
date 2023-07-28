@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth, idToken } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -14,16 +14,17 @@ import {GoogleMapsModule} from '@angular/google-maps';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PushNotifications, PushNotificationsPlugin } from '@capacitor/push-notifications';
 
+const push: PushNotificationsPlugin = PushNotifications
 
 export function HttpLoaderFactory(http: HttpClient) {
-
   return new TranslateHttpLoader(http, './assets/i18n/', '.json'
   );
 }
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent ],
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -44,9 +45,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       registrationStrategy: 'registerWhenStable:30000'
     }),
     HttpClientModule,
+
     GoogleMapsModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

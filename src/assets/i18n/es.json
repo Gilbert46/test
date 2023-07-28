@@ -1,7 +1,7 @@
 {
   "TABS": {
     "TAB1": {
-      "TXT": "Entrar / Registrarse"
+      "TXT": "Empezar / Registrarse"
     },
     "TAB2": {
       "TXT": "Todos los puzles"
@@ -45,7 +45,7 @@
       "TEXT": "Teléfono ha de ser numérico"
     },
     "SUMIT": {
-      "TEXT": "Entar"
+      "TEXT": "Empezar"
     },
     "BUTTON": {
       "TEXT": "Registrarse"
@@ -57,7 +57,7 @@
       "TXT": "¿Has olvidado la contraseña?"
     },
     "TEXT_3": {
-      "TXT": "compartir la aplicación PUZZLE-POP..."
+      "TXT": "compartir la aplicación PUZZLE-21POP..."
     },
     "TEXT_4": {
       "TXT": "Usuario no válido, alguno de los campos no es correcto"

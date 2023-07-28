@@ -73,6 +73,8 @@ export class NewPage implements OnInit {
   }
 
   changePage(n: number): void {
+    this.photoService.filepath = ''
+    this.photoService.webViewPath = ''
     if (n == 1) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true });
     else if (n == 2) this.router.navigateByUrl('/tab1/home/'+this.authService.auth, { replaceUrl: true });
     else if (n == 3) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true });

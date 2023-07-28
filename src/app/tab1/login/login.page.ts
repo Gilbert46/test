@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { UserCredential } from '@angular/fire/auth';
-//import { Plugins } from '@capacitor/core';
-//const { share } = Plugins;
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
+import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from '@capacitor/push-notifications';
+import { PushService } from 'src/app/services/push.service';
 
 
 @Component({
@@ -20,7 +20,28 @@ export class LoginPage implements OnInit {
   msgAction: string = ''
   nLeg: number = 0
   credentials:FormGroup=new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl ('',[Validators.required,Validators.minLength(3)]),phone:new FormControl('',[Validators.required,Validators.maxLength(9),Validators.minLength(9)]),id:new FormControl ('')})
-  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController, private alertController: AlertController, private authService: AuthService, private router: Router, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController, private alertController: AlertController, private authService: AuthService, private router: Router, private translate: TranslateService, private pushService: PushService) {
+    /*
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') PushNotifications.register();
+    });
+    PushNotifications.addListener('registration', (token: Token) => {
+      alert('Push registration success, token: ' + token.value);
+    });
+    PushNotifications.addListener('registrationError', (error: any) => {
+      alert('Error on registration: ' + JSON.stringify(error));
+    });
+    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
+        alert('Push received: ' + JSON.stringify(notification));
+    },
+    );
+    PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+    },
+    );
+    */
+    //pushService.init()
+  }
 
   ngOnInit() {
     this.setFlag(false, false);

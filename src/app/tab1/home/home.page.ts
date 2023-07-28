@@ -5,10 +5,8 @@ import { User } from '../../interfaces/user';
 import { TabsPage } from '../../tabs/tabs.page';
 import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
-//import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from '@capacitor/push-notifications';
 import { PushService } from 'src/app/services/push.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { MapsService } from 'src/app/services/maps.service';
 
 
 @Component({
@@ -33,25 +31,7 @@ export class Home1Page implements OnInit {
     this.authService.getUsuari(idField).subscribe(res => {this.user={email:res.email,password:res.password,name:res.name,adrece:res.adrece,phone:res.phone,id:res.id,filepath:res.filepath, webviewPath:res.webviewPath};})
     this.dades = await this.geolocUser()
     this.sincronMap()
-    /*
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') PushNotifications.register();
-    });
-    PushNotifications.addListener('registration', (token: Token) => {
-      alert('Push registration success, token: ' + token.value);
-    });
-    PushNotifications.addListener('registrationError', (error: any) => {
-      alert('Error on registration: ' + JSON.stringify(error));
-    });
-    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
-    },
-    );
-    PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-    },
-    );
-    */
+
   }
 
   async geolocUser() {
@@ -70,7 +50,7 @@ export class Home1Page implements OnInit {
   async createMap() {
     const mapRef = document.getElementById('map')!;
     const newMap = await GoogleMap.create({id: 'my-map', element: mapRef, apiKey: environment.firebase.apiKey,
-      config: {center: {lat: this.dades.coords.latitude, lng :this.dades.coords.longitude},zoom: 15,},
+      config: {center: {lat: this.dades.coords.latitude, lng :this.dades.coords.longitude},zoom: 15},
     })
     const markerId = await newMap.addMarker({
       coordinate: {lat: this.dades.coords.latitude,lng: this.dades.coords.longitude}

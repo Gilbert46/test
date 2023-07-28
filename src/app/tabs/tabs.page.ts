@@ -1,8 +1,7 @@
 import { Component } from '@angular/core'
 import { AuthService } from '../services/auth.service'
-import { PushService } from '../services/push.service';
-import { CapacitorConfig } from '@capacitor/cli';
-import { PushNotifications, PushNotificationsPlugin, PushNotificationSchema, ActionPerformed, Token } from '@capacitor/push-notifications';
+//import { PushService } from '../services/push.service';
+//import { PushNotifications, PushNotificationsPlugin, PushNotificationSchema, ActionPerformed, Token } from '@capacitor/push-notifications';
 
 @Component({
   selector: 'app-tabs',
@@ -10,7 +9,7 @@ import { PushNotifications, PushNotificationsPlugin, PushNotificationSchema, Act
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-  constructor(private authService: AuthService, private pushService: PushService) {
+  constructor(private authService: AuthService/*, private pushService: PushService*/) {
     /*
     PushNotifications.requestPermissions().then(result => {
       if (result.receive === 'granted') PushNotifications.register();

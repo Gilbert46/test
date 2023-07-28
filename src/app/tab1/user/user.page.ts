@@ -82,6 +82,8 @@ export class UserPage implements OnInit {
     this.changePage(2);
   }
   changePage(n: number): void {
+    this.avatarService.webviewPath = ''
+    this.avatarService.webviewPath = ''
     if (n == 1) this.router.navigateByUrl('/tab1/new/'+this.authService.auth, { replaceUrl: true })
     else if (n == 2) this.router.navigateByUrl('/tab1/home/'+this.authService.auth, { replaceUrl: true })
     else if (n == 3) this.router.navigateByUrl('/tab1/puzzles/'+this.authService.auth, { replaceUrl: true })

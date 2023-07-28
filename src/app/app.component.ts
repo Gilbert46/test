@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 import { TranslateService } from '@ngx-translate/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -18,18 +19,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.changeSplash()
   }
-  /*
   async initSplash() {
     await SplashScreen.hide()
     await SplashScreen.show({
-      showDuration: 5000,
+      showDuration: 500,
       autoHide: true,
     })
-  }*/
+  }
   changeSplash(): void {
     setTimeout(() => {
       if (!this.time[4]) {
         this.hidden = true
+        this.initSplash()
       }
       else if (!this.time[3]) {
         this.time[4] = false
