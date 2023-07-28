@@ -5,9 +5,10 @@ import { User } from '../../interfaces/user';
 import { TabsPage } from '../../tabs/tabs.page';
 import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
-//import { PushService } from 'src/app/services/push.service';
+//import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from '@capacitor/push-notifications';
+import { PushService } from 'src/app/services/push.service';
 import { Geolocation } from '@capacitor/geolocation';
-//import { MapsService } from 'src/app/services/maps.service';
+import { MapsService } from 'src/app/services/maps.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { Geolocation } from '@capacitor/geolocation';
 
 export class Home1Page implements OnInit {
   user: User={email:'',password:'',name:'',adrece:'',phone:'',id:'',filepath:'',webviewPath:''}
-  constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage/*, public pushService: PushService*/ ) {}
+  constructor(private authService: AuthService, private router: Router, public tabsPage: TabsPage, public pushService: PushService ) {}
   localition = { lat: 52, lng: 1.25}
   map!: google.maps.Map
   dades: any
@@ -26,14 +27,33 @@ export class Home1Page implements OnInit {
   ngOnInit(): void {
     this.tabsPage.setBtTab1(true)
     this.initUser()
-    //this.pushService.init()
   }
   async initUser() {
     const idField = String(this.authService.idx);
     this.authService.getUsuari(idField).subscribe(res => {this.user={email:res.email,password:res.password,name:res.name,adrece:res.adrece,phone:res.phone,id:res.id,filepath:res.filepath, webviewPath:res.webviewPath};})
     this.dades = await this.geolocUser()
     this.sincronMap()
+    /*
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') PushNotifications.register();
+    });
+    PushNotifications.addListener('registration', (token: Token) => {
+      alert('Push registration success, token: ' + token.value);
+    });
+    PushNotifications.addListener('registrationError', (error: any) => {
+      alert('Error on registration: ' + JSON.stringify(error));
+    });
+    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
+        alert('Push received: ' + JSON.stringify(notification));
+    },
+    );
+    PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+    },
+    );
+    */
   }
+
   async geolocUser() {
     const coordinates = await Geolocation.getCurrentPosition()
     return coordinates

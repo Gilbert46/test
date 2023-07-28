@@ -65,16 +65,14 @@ export class AuthService {
     const auth = getAuth()
     if (pw.length<6) this.showAlert('ERROR !!!', 'Password almenos con 6 carácteres');
     else {
-      sendPasswordResetEmail(auth, email)
-      .then(() => {
+      sendPasswordResetEmail(auth, email).then(() => {
         // Password reset email sent!
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'text';
         xhr.onload = async (event) => { const text = xhr.response }
         xhr.open('GET', email)
         xhr.send()
-      })
-      .catch((error) => {
+      }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         this.showAlert('ERROR !!!', 'Email no válido');

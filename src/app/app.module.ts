@@ -13,15 +13,19 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import {GoogleMapsModule} from '@angular/google-maps';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { TranslateHttpLoader} from '@ngx-translate/http-loader'
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PushNotifications, PushNotificationsPlugin } from '@capacitor/push-notifications';
+import { CapacitorConfig } from '@capacitor/cli';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
+
   return new TranslateHttpLoader(http, './assets/i18n/', '.json'
   );
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -47,4 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {}
+
+}

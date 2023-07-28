@@ -80,7 +80,6 @@
         <ion-input fill="solid" type="number" placeholder="entrar precio del puzzle" formControlName="precio" [ngClass]="{'ion-invalid':!puzzleForm.controls['precio'].valid}"></ion-input>
         <ion-input fill="solid" type="number" placeholder="entrar piezas del puzzle" formControlName="piezas" [ngClass]="{'ion-invalid':!puzzleForm.controls['piezas'].valid}"></ion-input>
         <ion-input fill="solid" type="text" placeholder="entrar propietario del puzzle" formControlName="propietario" [ngClass]="{'ion-invalid':!puzzleForm.controls['propietario'].valid}"></ion-input>
-        <!--<ion-img class="imatge" formControlName="webviewPath" [src]="puzzleForm.controls['webviewPath'].value"></ion-img>-->
         <ion-input fill="solid" type="number" placeholder="entrar altura del puzzle" formControlName="alto" [ngClass]="{'ion-invalid':!puzzleForm.controls['alto'].valid}"></ion-input>
         <ion-input fill="solid" type="number" placeholder="entrar ancho del puzzle" formControlName="ancho" [ngClass]="{'ion-invalid':!puzzleForm.controls['ancho'].valid}"></ion-input>
         <ion-input fill="solid" type="number" placeholder="entrar año del puzzle" formControlName="ano" [ngClass]="{'ion-invalid':!puzzleForm.controls['ano'].valid}"></ion-input>
@@ -89,6 +88,9 @@
         <ion-input fill="solid" type="text" placeholder="entrar comentario del puzzle" formControlName="comentario" [ngClass]="{'ion-invalid':!puzzleForm.controls['comentario'].valid}"></ion-input>
         <div #divMap style="width:94%; height:390px; margin: 1px auto" id="divMap"></div>
         <ion-input fill="solid" type="text" placeholder="entrar localización del puzzle" formControlName="localizacion" (keyup)="searchMaps(puzzleForm.controls['localizacion'].value)" [ngClass]="{'ion-invalid':!puzzleForm.controls['localizacion'].valid}"></ion-input>
+        <br/>
+        <ion-fab horizontal="center" slot="fixed"><ion-fab-button><ion-icon name="camera" (click)="changePhoto()"></ion-icon></ion-fab-button></ion-fab>
+        <br/><br/><br/><br/>
         <div class="buttons">
           <div class="flex">
             <ion-button type="submit" [disabled]="!puzzleForm.valid"><ion-icon size="large" color="success" name="checkmark-circle"></ion-icon></ion-button>
@@ -96,6 +98,9 @@
           </div>
         </div>
       </form>
+      <!--<div class="centrat" (click)="visualPhoto()">
+        <ion-img class="imatge" formControlName="filepath" [src]="puzzleForm.controls['filePath'].value"></ion-img>
+      </div>-->
     </div>
   </div>
 </ion-content>

@@ -3,6 +3,11 @@ import { Puzzle } from '../../interfaces/puzzle';
 import { PuzzleService } from '../../services/puzzle.service';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
 import { TranslateService } from '@ngx-translate/core';
+import { GoogleMap } from '@capacitor/google-maps';
+import { environment } from 'src/environments/environment';
+import { Geolocation } from '@capacitor/geolocation';
+import { MapsService } from 'src/app/services/maps.service';
+import { Share } from '@capacitor/share';
 
 
 @Component({
@@ -11,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./all.page.scss'],
 })
 export class AllPage implements OnInit {
-  constructor(private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService) { }
+  constructor(private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService, private mapsService: MapsService) { }
   index: number = 0
   npage: number = 0
   columne: number = 6
@@ -19,6 +24,9 @@ export class AllPage implements OnInit {
   flag: boolean[] = [false, false, false]
   puzzle: Puzzle = {marca:'',titulo:'',categoria:'',precio:0,piezas:0,propietario:'',filepath:'',webviewPath:'',alto:0,ancho:0,ano:0,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:'',id:''}
   puzzles : Puzzle[] = []
+  localition = {lat: 46, lng: 1.24}
+  map!: google.maps.Map;
+  dades: any
 
   ngOnInit(): void {
     if (screen.width > 980) this.columne = 3;
@@ -73,8 +81,9 @@ export class AllPage implements OnInit {
 
   detallPuzzle(idx: number) : void {
     this.flag[0] = true
-    this.puzzle = {marca:this.puzzles[idx].marca,titulo:this.puzzles[idx].titulo,categoria:this.puzzles[idx].categoria,precio:this.puzzles[idx].precio,piezas:this.puzzles[idx].piezas,propietario:this.puzzles[idx].propietario,filepath:this.puzzles[idx].filepath,webviewPath:this.puzzles[idx].webviewPath,alto:0,ancho:0,ano:0,condicion:'',estado:'',privado:false,comentario:'',userid:'',localizacion:'',id:''}
+    this.puzzle = {marca:this.puzzles[idx].marca,titulo:this.puzzles[idx].titulo,categoria:this.puzzles[idx].categoria,precio:this.puzzles[idx].precio,piezas:this.puzzles[idx].piezas,propietario:this.puzzles[idx].propietario,filepath:this.puzzles[idx].filepath,webviewPath:this.puzzles[idx].webviewPath,alto:this.puzzles[idx].alto,ancho:this.puzzles[idx].ancho,ano:this.puzzles[idx].ano,condicion:this.puzzles[idx].condicion,estado:this.puzzles[idx].estado,privado:false,localizacion:this.puzzles[idx].localizacion};
     this.index = idx;
+    //this.sincronMap()
   }
 
   changeState(st: boolean, idx: number, incr: number): void {
@@ -113,8 +122,8 @@ export class AllPage implements OnInit {
   urlFile(path: Puzzle, i: number): void {
     this.flag[1] = false;
     if (i == 0) this.dlimatgeService.dowmloadImage(this.puzzle.webviewPath)
-    /*if (i == 1) window.location.href = 'https://web.whatsapp.com/';
-    if (i == 2) window.location.href= 'https://www.google.com/intl/es/gmail/about/'
+    if (i == 1) Share.share({ url: path.filepath });
+    /*if (i == 2) window.location.href= 'https://www.google.com/intl/es/gmail/about/'
     if (i == 3) window.location.href= 'https://twitter.com/'*/
   }
 
@@ -186,9 +195,54 @@ export class AllPage implements OnInit {
       ano: puzzles2[j].ano,
       condicion: puzzles2[j].condicion,
       estado: puzzles2[j].estado,
+      privado: puzzles2[j].privado,
       localizacion: puzzles2[j].localizacion
     }
     return puzzle2;
+  }
+
+  async sincronMap() {
+    const promise=new Promise((resolve, reject) => {resolve(123)})
+    promise.then(() => {
+      setTimeout(() => {
+        if (this.puzzle.localizacion == '') this.initPageMap()
+        else this.searchMaps(String(this.puzzle.localizacion))
+      }, 500)
+    })
+  }
+  searchMaps(adress: string): void {
+    try {
+      this.mapsService.getCoordinatesByAddress(adress).subscribe((res: any) => {
+          if (res.results[0]) {
+              this.localition = res.results[0].geometry.location
+              this.initMap()
+          }
+          else {
+            this.initPageMap()
+          }
+      });
+    } catch(err) {
+      console.log(err);
+      this.initPageMap();
+    }
+  }
+  async initPageMap() {
+    this.dades = await this.getCurrentPosition();
+    this.localition = { lat: this.dades.coords.latitude, lng: this.dades.coords.longitude}
+    this.initMap();
+  }
+  async initMap() {
+    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom: 15, center: this.localition})
+    const marker = new google.maps.Marker({position: this.localition, map: this.map, animation: google.maps.Animation.BOUNCE})
+    const service = new google.maps.places.PlacesService(this.map)
+  }
+  createMarker(place: any) {
+    if (!place.geometry || !place.geometry.location) return
+    const marker = new google.maps.Marker({map: this.map,position: place.geometry.location})
+  }
+  async getCurrentPosition() {
+    const coordinates = await Geolocation.getCurrentPosition()
+    return coordinates
   }
 
 }

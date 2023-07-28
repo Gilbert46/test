@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import { PushNotifications } from '@capacitor/push-notifications';
+import { PushNotifications, PushNotificationsPlugin, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushService {
+  constructor() { }
+
   init() {
     this.addListeners();
     this.registerNotifications();
     this.getDeliveredNotifications();
   }
-
-  async addListeners() {
+  async addListeners ()  {
     await PushNotifications.addListener('registration', token => {
-      console.info('Registration token: ', token.value);
+      console.info('PUSH TEST Registration token: ', token.value);
     });
 
     await PushNotifications.addListener('registrationError', err => {
-      console.error('Registration error: ', err.error);
+      console.error('PUSH TEST Registration error: ', err.error);
     });
 
     await PushNotifications.addListener('pushNotificationReceived', notification => {
-      console.log('Push notification received: ', notification);
+      console.log('PUSH TEST Push notification received: ', notification);
     });
 
     await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
-      console.log('Push notification action performed', notification.actionId, notification.inputValue);
+      console.log('PUSH TEST NPush notification action performed', notification.actionId, notification.inputValue);
     });
-
   }
 
-  async registerNotifications() {
+  async registerNotifications () {
     let permStatus = await PushNotifications.checkPermissions();
 
     if (permStatus.receive === 'prompt') {
@@ -42,9 +42,9 @@ export class PushService {
     }
 
     await PushNotifications.register();
-  }
+    }
 
-  async getDeliveredNotifications()  {
+  async getDeliveredNotifications (){
     const notificationList = await PushNotifications.getDeliveredNotifications();
     console.log('delivered notifications', notificationList);
   }

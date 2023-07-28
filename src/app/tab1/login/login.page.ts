@@ -8,6 +8,8 @@ import { UserCredential } from '@angular/fire/auth';
 //const { share } = Plugins;
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
+//import { PushNotifications, ActionPerformed, PushNotificationSchema, Token } from '@capacitor/push-notifications';
+import { PushService } from 'src/app/services/push.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +21,30 @@ export class LoginPage implements OnInit {
   msgAction: string[] = []
   nLeg: number = 0
   credentials:FormGroup=new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl ('',[Validators.required,Validators.minLength(5)]),phone:new FormControl('',[Validators.required,Validators.maxLength(9),Validators.minLength(9)]),id:new FormControl ('')})
-  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController, private alertController: AlertController, private authService: AuthService, private router: Router, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController, private alertController: AlertController, private authService: AuthService, private router: Router, private translate: TranslateService/*, private pushService: PushService*/) { }
 
   ngOnInit() {
-    this.setIsLog(false, 0)
+    this.setIsLog(false, 0);
+    //this.pushService.init();
+    /*
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') PushNotifications.register();
+    });
+    PushNotifications.addListener('registration', (token: Token) => {
+      alert('Push registration success, token: ' + token.value);
+    });
+    PushNotifications.addListener('registrationError', (error: any) => {
+      alert('Error on registration: ' + JSON.stringify(error));
+    });
+    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
+        alert('Push received: ' + JSON.stringify(notification));
+    },
+    );
+    PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+    },
+    );
+    */
   }
 
   async login() {

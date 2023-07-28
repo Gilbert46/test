@@ -6,11 +6,12 @@ import { Puzzle } from '../../interfaces/puzzle';
 import { AuthService } from '../../services/auth.service';
 import { PuzzleService } from '../../services/puzzle.service';
 import { DlimatgeService } from 'src/app/services/dlimatge.service';
+import { PhotoService } from 'src/app/services/photo.service';
 import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
 import { MapsService } from 'src/app/services/maps.service';
-import { Share } from '@capacitor/share'
+import { Share } from '@capacitor/share';
 import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 
 
@@ -21,7 +22,7 @@ import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 })
 export class PuzzlesPage implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private authService: AuthService, private location: Location, private router: Router, private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService, private mapsService: MapsService) {}
+  constructor(private formBuilder: FormBuilder,private authService: AuthService, private location: Location, private router: Router, private puzzleService: PuzzleService, private dlimatgeService: DlimatgeService, private mapsService: MapsService, private photoService: PhotoService) {}
 
   title: string = ''
   idField: string = ''
@@ -191,9 +192,18 @@ export class PuzzlesPage implements OnInit {
     this.sincronMap()
   }
 
+  changePhoto():  void {
+    this.photoService.addNewPhotoStore()
+  }
+  visualPhoto(): void {
+    if (this.photoService.filepath != '') this.puzzleForm.controls['filepath'].setValue(this.photoService.filepath)
+    if (this.photoService.webViewPath != '') this.puzzleForm.controls['webviewPath'].setValue(this.photoService.webViewPath)
+  }
   operationPuzzle(): void {
     if (!this.flag[2]) this.puzzleService.updatePuzzle(this.puzzleForm.value)
     else this.puzzleService.deletePuzzle(this.puzzleForm.value)
+    this.photoService.filepath = ''
+    this.photoService.webViewPath = ''
     this.flag[0] = false
     this.changePage(2)
   }

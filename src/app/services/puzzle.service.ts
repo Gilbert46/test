@@ -37,7 +37,7 @@ export class PuzzleService {
   updatePuzzle(puzzle: Puzzle) {
     this.showAlert('FELICIDADES !!', 'Puzzle modificado correctamente')
     const stPuzzle = doc(this.firestore, `puzzle/${puzzle.id}`)
-    return updateDoc(stPuzzle, {marca:puzzle.marca, titulo:puzzle.titulo, categoria:puzzle.categoria, filepath:puzzle.filepath, webViewPath:puzzle.webviewPath, alto:puzzle.alto, ancho:puzzle.ancho, ano:puzzle.ano, condicion:puzzle.condicion, estado:puzzle.estado, privado:puzzle.privado, comentario:puzzle.comentario, userid:puzzle.userid, localizacion:puzzle.localizacion, id:puzzle.id})
+    return updateDoc(stPuzzle, {marca:puzzle.marca, titulo:puzzle.titulo, categoria:puzzle.categoria, precio:puzzle.precio, piezas:puzzle.piezas, propietario: puzzle.propietario, filepath:puzzle.filepath, webViewPath:puzzle.webviewPath, alto:puzzle.alto, ancho:puzzle.ancho,ano:puzzle.ano,condicion:puzzle.condicion, estado:puzzle.estado,privado:puzzle.privado,userid:puzzle.userid,localizacion:puzzle.localizacion,comentario:puzzle.comentario,id:puzzle.id})
   }
 
   async showAlert(head: string, msg: string) {

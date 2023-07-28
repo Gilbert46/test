@@ -7,7 +7,7 @@
       "TXT": "All puzzles"
     },
     "TAB3": {
-      "TXT": "Time Step"
+      "TXT": "Time step"
     }
   },
   "LOGIN":  {
@@ -102,7 +102,7 @@
   },
   "TIME": {
     "TITLE": {
-      "TXT": "Game"
+      "TXT": "Time step"
     }
   }
 }

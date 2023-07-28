@@ -16,6 +16,7 @@ import { setPersistence } from '@angular/fire/auth';
 })
 export class NewPage implements OnInit {
   idField: string = ''
+  visualFile: string = '../../../assets/img/ismael.png'
   puzzleFrom: FormGroup = new FormGroup({marca: new FormControl('', [Validators.required, Validators.minLength(3)]), titulo: new FormControl('', [Validators.required, Validators.minLength(3)]), categoria: new FormControl('', [Validators.required, Validators.minLength(3)]), precio: new FormControl('', [Validators.required, Validators.minLength(3)]), piezas: new FormControl('', [Validators.required, Validators.minLength(3)]), propietario: new FormControl('',[Validators.required, Validators.minLength(3)]), filepath: new FormControl(''), webviewPath: new FormControl(''), alto: new FormControl(''), ancho: new FormControl(''), año: new FormControl(''), condicion: new FormControl(''), estado: new FormControl(''), comentario: new FormGroup(''), privado: new FormGroup('') ,userid: new FormControl(''), localizacion: new FormControl(''), id: new FormControl('')})
   constructor(private location: Location, private router: Router, private authService: AuthService, private photoService: PhotoService, private puzzleService: PuzzleService, private alertController: AlertController) { }
 
@@ -46,6 +47,9 @@ export class NewPage implements OnInit {
 
   addPhoto():  void {
     this.photoService.addNewPhotoStore()
+  }
+  visualPhoto(): void {
+    this.visualFile = this.photoService.filepath
   }
 
   addPuzzle(): void {
