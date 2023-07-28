@@ -14,8 +14,6 @@ import {GoogleMapsModule} from '@angular/google-maps';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { PushNotifications, PushNotificationsPlugin } from '@capacitor/push-notifications';
-import { CapacitorConfig } from '@capacitor/cli';
 
 
 export function HttpLoaderFactory(http: HttpClient) {

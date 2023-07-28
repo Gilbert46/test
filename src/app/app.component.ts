@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 import { TranslateService } from '@ngx-translate/core';
-import { PushService } from './services/push.service';
-//import { readFileSync } from 'fs';
-//import { parse } from 'querystring';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +8,15 @@ import { PushService } from './services/push.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private translate: TranslateService, private pushService: PushService) {
+  constructor(private translate: TranslateService) {
     translate.setDefaultLang('es')
     translate.use('es')
   }
   hidden: boolean = false
-  time: boolean[] = [true,true,true,true,true]
+  time: boolean[] = [true, true, true, true, true]
 
   ngOnInit(): void {
     this.changeSplash()
-    //this.initSplash()
-
   }
   /*
   async initSplash() {
@@ -58,10 +53,5 @@ export class AppComponent implements OnInit {
       }
     }, 500);
   }
-  /*
-  insertRegistred() {
-    const fileContent = readFileSync('../assets/puzzles.csv', 'utf-8');
-    const csvContent = parse(fileContent)
-    console.log(csvContent)
-  }*/
+
 }

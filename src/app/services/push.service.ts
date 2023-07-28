@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CapacitorConfig } from '@capacitor/cli';
 import { PushNotifications, PushNotificationsPlugin, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 
 @Injectable({

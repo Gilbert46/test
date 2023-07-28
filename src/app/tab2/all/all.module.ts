@@ -8,7 +8,6 @@ import { AllPageRoutingModule } from './all-routing.module';
 
 import { AllPage } from './all.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AllPageRoutingModule,
     TranslateModule
   ],
-  declarations: [AllPage],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [AllPage]
 })
 
 export class AllPageModule {}

@@ -30,14 +30,13 @@
       <div *ngIf="!userForm.controls['name'].valid"><ion-note>Nombre  necesitas mínimo 5 carácteres</ion-note></div>
       <ion-input fill="solid" type="text" placeholder="entrar dirección" formControlName="adrece" (keyup)="searchMaps(this.userForm.controls['adrece'].value)" [ngClass]="{'ion-invalid': !userForm.controls['adrece'].valid}"></ion-input>
       <div #divMap style="width:94%; height:350px; margin: 1px auto" id="divMap"></div>
-      <div *ngIf="!userForm.controls['adrece'].valid"><ion-note>Dirección  necesitas mínimo 5 carácteres</ion-note></div>
+      <div *ngIf="!userForm.controls['adrece'].valid"><ion-note>Dirección  necesitas mínimo 3 carácteres</ion-note></div>
       <ion-input fill="solid" type="number" placeholder="entrar teléfono" formControlName="phone" [ngClass]="{'ion-invalid': !userForm.controls['phone'].valid}"></ion-input>
       <div *ngIf="!userForm.controls['phone'].valid"><ion-note>Teléfono ha de ser numérico</ion-note></div>
       <ion-input fill="solid" type="password" value="{{ user.password }}" [disabled]="true"></ion-input>
       <div *ngIf="!userForm.controls['password'].valid"><ion-note>Contraseña necesitas mínimo 6 carácteres</ion-note></div>
       <ion-input fill="solid" type="password" value="{{ user.password }}" [disabled]="true"></ion-input>
       <div *ngIf="!userForm.controls['password'].valid"><ion-note>Las dos contraseñas han ser idénticas</ion-note></div>
-      <!--<ion-input fill="solid" type="file" formControlName="webviewPath"> otro Avatar</ion-input>-->
       <br/>
       <ion-fab horizontal="center" slot="fixed"><ion-fab-button><ion-icon name="camera" (click)="changeAvatar()"></ion-icon></ion-fab-button></ion-fab>
       <br/><br/><br/><br/>

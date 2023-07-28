@@ -42,7 +42,7 @@
       "PLACEHOLDER": "entrar teléfono"
     },
     "ERRORPHONE": {
-      "TEXT": "Teléfono no ha de ser numérico"
+      "TEXT": "Teléfono ha de ser numérico"
     },
     "SUMIT": {
       "TEXT": "Entar"

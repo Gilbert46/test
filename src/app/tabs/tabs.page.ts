@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
 import { AuthService } from '../services/auth.service'
 import { PushService } from '../services/push.service';
+import { CapacitorConfig } from '@capacitor/cli';
 import { PushNotifications, PushNotificationsPlugin, PushNotificationSchema, ActionPerformed, Token } from '@capacitor/push-notifications';
-
 
 @Component({
   selector: 'app-tabs',
@@ -13,14 +13,8 @@ export class TabsPage {
   constructor(private authService: AuthService, private pushService: PushService) {
     /*
     PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
-      }
+      if (result.receive === 'granted') PushNotifications.register();
     });
-
     PushNotifications.addListener('registration', (token: Token) => {
       alert('Push registration success, token: ' + token.value);
     });
@@ -42,7 +36,8 @@ export class TabsPage {
         alert('Push action performed: ' + JSON.stringify(notification));
       },
     );
-      */
+    */
+    //console.log('test')
     //this.pushService.init()
   }
 

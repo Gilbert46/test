@@ -46,7 +46,6 @@
             <div class="buttons">
               <ion-buttons class="flex">
                 <ion-button (click)="searchFile(p.filepath)"><ion-icon color="tertiary" size="large" name="share-outline"></ion-icon></ion-button>
-                <!--<ion-button><ion-icon aria-hidden="true" size="large" color="dark" name="chatbubbles-outline"></ion-icon></ion-button>-->
                 <ion-button (click)="crudPuzzle(false, i)"><ion-icon color="tertiary" size="large" name="pencil-outline" ></ion-icon></ion-button>
                 <ion-button (click)="crudPuzzle(true, i)"><ion-icon color="danger" size="large" name="trash-outline"></ion-icon></ion-button>
               </ion-buttons>
@@ -98,10 +97,9 @@
           </div>
         </div>
       </form>
-      <!--<div class="centrat" (click)="visualPhoto()">
-        <ion-img class="imatge" formControlName="filepath" [src]="puzzleForm.controls['filePath'].value"></ion-img>
-      </div>-->
+      <div class="centrat" (click)="visualPhoto()">
+        <ion-img class="imatge2" [src]="imatge"></ion-img>
+      </div>
     </div>
   </div>
 </ion-content>
-

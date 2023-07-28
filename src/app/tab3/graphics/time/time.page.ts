@@ -1,5 +1,5 @@
 import { Component, OnInit, numberAttribute } from '@angular/core';
-import { IonImg } from '@ionic/angular';
+//import { IonImg } from '@ionic/angular';
 import { randomInt } from 'crypto';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -27,7 +27,7 @@ export class TimePage implements OnInit {
   }
 
   public timerFlag(): void {
-    if (this.gamming) {
+    if (this.gamming && this.time > 0) {
       setTimeout(() => {
         this.time -= 1
         const timeText =  document.getElementById('time')! as HTMLDivElement
@@ -63,10 +63,11 @@ export class TimePage implements OnInit {
       else if (cont == 3) this.image[rand] = 'triangle.png'
     }
     for (let e=0; e < 16; e++) {
-      if (e < 4) this.casetes[e] = '../../../../assets/img/'+this.image[0]
+      if (e == 0 || e == 15) this.casetes[e] = '../../../../assets/img/void.png'
+      else if (e < 4) this.casetes[e] = '../../../../assets/img/'+this.image[0]
       else if (e < 8) this.casetes[e] = '../../../../assets/img/'+this.image[1]
       else if (e < 12) this.casetes[e] = '../../../../assets/img/'+this.image[2]
-      else if (e < 16) this.casetes[e] = '../../../../assets/img/'+this.image[3]
+      else if (e < 15) this.casetes[e] = '../../../../assets/img/'+this.image[3]
     }
 
   }

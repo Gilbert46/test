@@ -26,6 +26,7 @@ export class PuzzlesPage implements OnInit {
 
   title: string = ''
   idField: string = ''
+  imatge: string = ''
   index: number = 0
   columne: number = 6
   npage: number = 0
@@ -42,14 +43,11 @@ export class PuzzlesPage implements OnInit {
     if (screen.width > 980) this.columne = 3
     this.initUser()
   }
-
   initUser(): void {
     this.idField = String(this.authService.idx)
     this.npage = 0
-    this.getSearchValue();
-
+    this.getSearchValue()
   }
-
   changePage(n: number): void {
     if (n == 1) this.router.navigateByUrl('/tab1/user/'+this.authService.auth, { replaceUrl: true });
     else if (n == 2) this.router.navigateByUrl('/tab1/home/'+this.authService.auth, { replaceUrl: true });
@@ -62,12 +60,10 @@ export class PuzzlesPage implements OnInit {
     let t = document.getElementById('searchTitle')! as HTMLInputElement;
     this.initPuzzle(parseInt(p.value), parseInt(n.value), t.value.toString())
   }
-
   async initPuzzle(price:number, pices:number, title:string) {
     this.puzzleService.getPuzzles().subscribe(res => {this.puzzles = this.orderTitle(res);})
     this.stepSort(price, pices, title)
   }
-
   async stepSort(price:number, pices:number, title:string) {
     const promise = new Promise ((resolve, reject) => {resolve(123)})
     promise.then(() => {
@@ -77,7 +73,6 @@ export class PuzzlesPage implements OnInit {
       }, 300);
     });
   }
-
   paginePuzle(): void {
     if (this.puzzles.length > 0) {
       let maxPage = Math.ceil(this.puzzles.length/10)
@@ -100,15 +95,9 @@ export class PuzzlesPage implements OnInit {
       }
     }
   }
-
   searchFile(dlimg: string): void {
-    //this.dlimatgeService.dowmloadImage(dlimg);
-    //const photo = Camera.getPhoto(dlimg);
-    Share.share({
-      url: dlimg,
-    });
+    Share.share({ url: dlimg });
   }
-
   sortPuzzle(price: number, pices: number, title: string) {
     for (let i=0; i<this.puzzles.length; i++) {
       if (this.puzzles[i].precio>price ||(this.puzzles[i].piezas>pices && pices<100000)||(pices<100000 && this.puzzles[i].piezas <= pices - 500)) {
@@ -126,12 +115,10 @@ export class PuzzlesPage implements OnInit {
       }
     }
   }
-
   otherPage(n: number): void {
     this.npage = n
     this.getSearchValue()
   }
-
   crudPuzzle(disabled: boolean, idx: number): void {
     this.flag[0] = true
     this.flag[2] = disabled
@@ -155,6 +142,7 @@ export class PuzzlesPage implements OnInit {
     this.puzzleForm.controls['userid'].setValue(this.puzzles[idx].userid)
     this.puzzleForm.controls['localizacion'].setValue(this.puzzles[idx].localizacion)
     this.puzzleForm.controls['id'].setValue(this.puzzles[idx].id)
+    this.imatge = this.puzzleForm.controls['filepath'].value
     if (!disabled) {
       this.title = 'MODIFICAR PUZLE'
       this.puzzleForm.controls['marca'].enable()
@@ -191,12 +179,14 @@ export class PuzzlesPage implements OnInit {
     }
     this.sincronMap()
   }
-
   changePhoto():  void {
     this.photoService.addNewPhotoStore()
   }
   visualPhoto(): void {
-    if (this.photoService.filepath != '') this.puzzleForm.controls['filepath'].setValue(this.photoService.filepath)
+    if (this.photoService.filepath != '') {
+      this.puzzleForm.controls['filepath'].setValue(this.photoService.filepath)
+      this.imatge = this.puzzleForm.controls['filepath'].value
+    }
     if (this.photoService.webViewPath != '') this.puzzleForm.controls['webviewPath'].setValue(this.photoService.webViewPath)
   }
   operationPuzzle(): void {
@@ -205,37 +195,37 @@ export class PuzzlesPage implements OnInit {
     this.photoService.filepath = ''
     this.photoService.webViewPath = ''
     this.flag[0] = false
+    this.flag[2] = false
     this.changePage(2)
   }
-
   orderTitle(puzzles2 : Puzzle[]): Puzzle[] {
     for (let e=0; e<puzzles2.length;e++) {
       if (puzzles2[e].userid != this.idField) {
         puzzles2.splice(e, 1)
-        e--
+        e -= 1
       }
     }
     for (let i=0; i < puzzles2.length - 1; i++) {
       for (let j=i+1; j < puzzles2.length; j++) {
         if (puzzles2[i].titulo.charAt(0).toUpperCase() > puzzles2[j].titulo.charAt(0).toUpperCase()) {
-          let puzzle2: Puzzle = this.subrrutine(puzzles2, j);
-          puzzles2.splice(j, 1);
-          puzzles2.splice(i, 0, puzzle2);
-          i--;
-          break;
+          let puzzle2: Puzzle = this.subrrutine(puzzles2, j)
+          puzzles2.splice(j, 1)
+          puzzles2.splice(i, 0, puzzle2)
+          i -= 1
+          break
         }
         else if (puzzles2[i].titulo.charAt(0).toUpperCase() === puzzles2[j].titulo.charAt(0).toUpperCase()) {
           for (let l=1; l < puzzles2[i].titulo.length; l++) {
             if (puzzles2[i].titulo.charAt(l) > puzzles2[j].titulo.charAt(l)) {
-              let puzzle2: Puzzle = this.subrrutine(puzzles2, j);
-              puzzles2.splice(j, 1);
-              puzzles2.splice(i, 0, puzzle2);
-              i--;
-              j = puzzles2.length - 1;
+              let puzzle2: Puzzle = this.subrrutine(puzzles2, j)
+              puzzles2.splice(j, 1)
+              puzzles2.splice(i, 0, puzzle2)
+              i -= 1
+              j = puzzles2.length - 1
               break;
             }
             else if (puzzles2[i].titulo.charAt(l).toUpperCase() < puzzles2[j].titulo.charAt(l).toUpperCase()) {
-              break;
+              break
             }
           }
         }
@@ -243,7 +233,6 @@ export class PuzzlesPage implements OnInit {
     }
     return puzzles2;
   }
-
   subrrutine(puzzles2: Puzzle[], j: number): Puzzle {
     let puzzle2: Puzzle = {
       marca: puzzles2[j].marca,
@@ -265,7 +254,7 @@ export class PuzzlesPage implements OnInit {
       localizacion: puzzles2[j].localizacion,
       id: puzzles2[j].id
     }
-    return puzzle2;
+    return puzzle2
   }
   async sincronMap() {
     const promise=new Promise((resolve, reject) => {resolve(123)})
@@ -295,10 +284,10 @@ export class PuzzlesPage implements OnInit {
   async initPageMap() {
     this.dades = await this.getCurrentPosition();
     this.localition = { lat: this.dades.coords.latitude, lng: this.dades.coords.longitude}
-    this.initMap();
+    this.initMap()
   }
   async initMap() {
-    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom: 15, center: this.localition})
+    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom: 8, center: this.localition})
     const marker = new google.maps.Marker({position: this.localition, map: this.map, animation: google.maps.Animation.BOUNCE})
     const service = new google.maps.places.PlacesService(this.map)
   }
@@ -311,6 +300,9 @@ export class PuzzlesPage implements OnInit {
     return coordinates
   }
   returnList(): void {
+    this.photoService.filepath = ''
+    this.photoService.webViewPath = ''
+    this.imatge = ''
     this.flag[0] = false
     this.flag[2] = false
   }

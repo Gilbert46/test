@@ -55,9 +55,6 @@
       <ion-button (click)="changeState(true, index, 1)"><ion-icon aria-hidden="true" name="play-forward-outline"></ion-icon></ion-button>
       <div class="menu" [hidden]="!flag[1]">
         <ion-button (click)="urlFile(puzzle, 0)"><ion-icon aria-hidden="true" name="download-outline"></ion-icon></ion-button>
-        <!--<a href="puzzle.webViewPath"><ion-button><ion-icon aria-hidden="true" name="download-outline"></ion-icon></ion-button></a>
-        <ion-button (click)="urlFile(puzzle, 2)"><ion-icon aria-hidden name="logo-medium"></ion-icon></ion-button>
-        <ion-button (click)="urlFile(puzzle, 3)"><ion-icon aria-hidden ion-icon name="logo-tumblr"></ion-icon></ion-button>-->
         <ion-button (click)="urlFile(puzzle, 1)"><ion-icon aria-hidden="true" name="share-outline"></ion-icon></ion-button>
         <ion-button (click)="playPuzzle(index)"><ion-icon aria-hidden="true" name="play-outline"></ion-icon></ion-button>
         <ion-button (click)="changeState(false, index, 0)"><ion-icon aria-hidden="true" color="warning" name="arrow-redo-outline"></ion-icon></ion-button>
@@ -76,7 +73,6 @@
       <p><em>{{ 'ALL.CARD.PARAF8' | translate }}</em>{{ puzzle.ano }} </p>
       <p><em>{{ 'ALL.CARD.PARAF9' | translate }}</em>{{ puzzle.condicion }} </p>
       <p><em>{{ 'ALL.CARD.PARAF10' | translate }}</em>{{ puzzle.estado }} </p>
-      <!--<div #divMap style="width:94%; height:390px; margin: 1px auto" id="divMap"></div>-->
       <p><em>{{ 'ALL.CARD.PARAF11' | translate }}</em>{{ puzzle.localizacion }} </p>
     </ion-card>
   </div>

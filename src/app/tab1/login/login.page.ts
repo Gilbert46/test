@@ -8,8 +8,7 @@ import { UserCredential } from '@angular/fire/auth';
 //const { share } = Plugins;
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
-//import { PushNotifications, ActionPerformed, PushNotificationSchema, Token } from '@capacitor/push-notifications';
-import { PushService } from 'src/app/services/push.service';
+
 
 @Component({
   selector: 'app-login',
@@ -18,33 +17,13 @@ import { PushService } from 'src/app/services/push.service';
 })
 export class LoginPage implements OnInit {
   isLog: boolean[] = [false, false, false]
-  msgAction: string[] = []
+  msgAction: string = ''
   nLeg: number = 0
-  credentials:FormGroup=new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl ('',[Validators.required,Validators.minLength(5)]),phone:new FormControl('',[Validators.required,Validators.maxLength(9),Validators.minLength(9)]),id:new FormControl ('')})
-  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController, private alertController: AlertController, private authService: AuthService, private router: Router, private translate: TranslateService/*, private pushService: PushService*/) { }
+  credentials:FormGroup=new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl ('',[Validators.required,Validators.minLength(3)]),phone:new FormControl('',[Validators.required,Validators.maxLength(9),Validators.minLength(9)]),id:new FormControl ('')})
+  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController, private alertController: AlertController, private authService: AuthService, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.setIsLog(false, 0);
-    //this.pushService.init();
-    /*
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') PushNotifications.register();
-    });
-    PushNotifications.addListener('registration', (token: Token) => {
-      alert('Push registration success, token: ' + token.value);
-    });
-    PushNotifications.addListener('registrationError', (error: any) => {
-      alert('Error on registration: ' + JSON.stringify(error));
-    });
-    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
-    },
-    );
-    PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-    },
-    );
-    */
+    this.setFlag(false, false);
   }
 
   async login() {
@@ -73,34 +52,43 @@ export class LoginPage implements OnInit {
           this.isLog[1] = true
           if (this.nLeg == 0) this.showAlert('usuario no válido', 'Alguno de los campos no son correctos')
           else if (this.nLeg == 1) this.showAlert('usuari no vàlid', 'Un dels dos camps no són correctes')
-          else if (this.nLeg == 2) this.showAlert('user not valid', "Any rows aren't correct")
+          else if (this.nLeg == 2) this.showAlert('user not valid', "Any rows aren't corrects")
         }
       },1000)
     })
   }
 
-  public setFlag(st: boolean) {
-    this.isLog[2] = st
-    if (!st) {
+  public setFlag(st: boolean, oper: boolean) {
+    this.isLog[2] = oper
+    if (!oper) {
       const lng = document.getElementById('select')! as HTMLOptionElement
       this.translate.setDefaultLang(String(lng.value))
       this.translate.use(String(lng.value))
-      if (String(lng.value) == 'es') {
-        this.nLeg = 0
-        if (!this.isLog[0]) this.msgAction[0] = 'Opción cambiar a REGISTRAR una cuenta de la web'
-        else this.msgAction[0] = 'Opción cambiar a ENTRAR en tu cuenta de la web'
-      }
-      if (String(lng.value) == 'ca') {
-        this.nLeg = 1
-        if (!this.isLog[1]) this.msgAction[1] = 'Opció canviar a REGISTRAR una conta de la web'
-        else this.msgAction[1] = 'Opció canviar a COMENÇAR en la seva conta de la web'
-      }
-      if (String(lng.value) == 'en') {
-        this.nLeg = 2
-        if (!this.isLog[2]) this.msgAction[2] = 'Option change to REGISTRED a count of web'
-        else this.msgAction[2] = 'Option change to GO ON a count of web'
-      }
+      if (String(lng.value) == 'es') this.nLeg = 0
+      if (String(lng.value) == 'ca') this.nLeg = 1
+      if (String(lng.value) == 'en') this.nLeg = 2
     }
+    if (!st) {
+      this.credentials.controls['name'].setValue('XXXXXXX')
+      this.credentials.controls['adrece'].setValue('XXXXXXX')
+      this.credentials.controls['phone'].setValue('999999999')
+      if (this.nLeg == 0) this.msgAction = 'Opción cambiar a REGISTRAR una cuenta de la web'
+      if (this.nLeg == 1) this.msgAction = 'Opció canviar a REGISTRAR una conta de la web'
+      if (this.nLeg == 2) this.msgAction = 'Option change to REGISTRED a count of web'
+    }
+    else {
+      this.credentials.controls['name'].setValue('')
+      this.credentials.controls['adrece'].setValue('')
+      this.credentials.controls['phone'].setValue('')
+      if (this.nLeg == 0) this.msgAction = 'Opción cambiar a EMPEZAR en tu cuenta de la web'
+      if (this.nLeg == 1) this.msgAction = 'Opció canviar a COMENÇAR en la seva conta de la web'
+      if (this.nLeg == 2) this.msgAction = 'Option change to START your count of web'
+    }
+    this.isLog[0] = st
+    this.isLog[1] = false
+    this.credentials.controls['email'].setValue('')
+    this.credentials.controls['password'].setValue('')
+
   }
 
   async showAlert(header: string, message: string) {
@@ -125,31 +113,7 @@ export class LoginPage implements OnInit {
       title: 'Puzzle-Pop',
       text: cadena,
       url: 'http://puzzle-21pop.web.app/',
-      //dialogTitle: 'Compartir con...',
     });
-  }
-
-  setIsLog(st: boolean, n: number): void {
-    if (!st) {
-      this.credentials.controls['name'].setValue('XXXXXXX')
-      this.credentials.controls['adrece'].setValue('XXXXXXX')
-      this.credentials.controls['phone'].setValue('999999999')
-      if (n == 0) this.msgAction[n] = 'Opción cambiar a REGISTRAR una cuenta de la web'
-      if (n == 1) this.msgAction[n] = 'Opció canviar a REGISTRAR una conta de la web'
-      if (n == 2) this.msgAction[n] = 'Option change to REGISTRED a count of web'
-    }
-    else {
-      this.credentials.controls['name'].setValue('')
-      this.credentials.controls['adrece'].setValue('')
-      this.credentials.controls['phone'].setValue('')
-      if (n == 0) this.msgAction[n] = 'Opción cambiar a ENTRAR en tu cuenta de la web'
-      if (n == 1) this.msgAction[n] = 'Opció canviar a COMENÇAR en la seva conta de la web'
-      if (n == 2) this.msgAction[n] = 'Option change to GO ON your count of web'
-    }
-    this.isLog[0] = st
-    this.isLog[1] = false
-    this.credentials.controls['email'].setValue('')
-    this.credentials.controls['password'].setValue('')
   }
 
 }

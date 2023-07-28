@@ -1,7 +1,7 @@
 {
   "TABS": {
     "TAB1": {
-      "TXT": "Go On / Registred"
+      "TXT": "Start / Registred"
     },
     "TAB2": {
       "TXT": "All puzzles"
@@ -12,7 +12,7 @@
   },
   "LOGIN":  {
     "TITLE": {
-      "LOGIN": "Go On / Registred"
+      "LOGIN": "Start / Registred"
     },
     "EMAIL": {
       "PLACEHOLDER": "into electronic mail"
@@ -42,7 +42,7 @@
       "PLACEHOLDER": "into phone"
     },
     "ERRORPHONE": {
-      "TEXT": "Phone haven't to be alfaphetic"
+      "TEXT": "Phone haves to be numeric"
     },
     "SUMIT": {
       "TEXT": "Go On"

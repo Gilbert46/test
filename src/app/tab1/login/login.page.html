@@ -3,10 +3,10 @@
     <div class="header">
       <ion-title>{{ "LOGIN.TITLE.LOGIN" | translate }}</ion-title>
       <div [hidden]="isLog[2]">
-        <ion-button (click)="setFlag(true)"><ion-icon aria-hidden="true" color="warning" name="language"></ion-icon></ion-button>
+        <ion-button (click)="setFlag(isLog[0], true)"><ion-icon aria-hidden="true" color="warning" name="language"></ion-icon></ion-button>
       </div>
       <div [hidden]="!isLog[2]">
-        <select (change)="setFlag(false)" id="select">
+        <select (change)="setFlag(isLog[0], false)" id="select">
           <option value="es" id="option">ESPAÑOL</option>
           <option value="ca" id="option">CATALÀ</option>
           <option value="en" id="option">ENGLISH</option>
@@ -40,7 +40,7 @@
     </div>
 	</form>
   <br/><br/>
-  <ion-text (click)="setIsLog(!isLog[0], nLeg)">{{ msgAction[nLeg] }}</ion-text>
+  <ion-text (click)="setFlag(!isLog[0], true)">{{ msgAction }}</ion-text>
   <br/><br/>
   <!--<div *ngIf="!credentials.controls['email'].invalid">
     <ion-text (click)="resetPassword(credentials.controls['email'].value, credentials.controls['email'].value)">{{ "LOGIN.TEXT_2.TXT" | translate }}</ion-text>

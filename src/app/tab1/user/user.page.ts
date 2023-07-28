@@ -14,8 +14,6 @@ import { Share } from '@capacitor/share'
 import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 
 
-
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.page.html',
@@ -26,7 +24,7 @@ export class UserPage implements OnInit {
   constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router, private location:Location, private alertController:AlertController, private avatarService: AvatarService, private mapsService: MapsService) { }
   imgSt: string = ''
   user: User = {email:'',password:'',name:'',adrece:'',phone:'',id:'',filepath:'',webviewPath:''}
-  userForm: FormGroup = new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),password2:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl('',[Validators.required,Validators.minLength(5)]),phone:new FormControl('',[Validators.required,Validators.minLength(8)]),filepath:new FormControl(''),webviewPath:new FormControl('')})
+  userForm: FormGroup = new FormGroup({email:new FormControl('',[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3,3}$')]),password:new FormControl ('',[Validators.required,Validators.minLength(6)]),password2:new FormControl ('',[Validators.required,Validators.minLength(6)]),name:new FormControl('',[Validators.required,Validators.minLength(5)]),adrece: new FormControl('',[Validators.required,Validators.minLength(3)]),phone:new FormControl('',[Validators.required,Validators.minLength(8)]),filepath:new FormControl(''),webviewPath:new FormControl('')})
   localition = {lat: 46, lng: 1.24}
   map!: google.maps.Map;
   dades: any
@@ -118,7 +116,7 @@ export class UserPage implements OnInit {
     return coordinates
   }
   async initMap() {
-    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom:15,center:this.localition})
+    this.map = new google.maps.Map(document.getElementById('divMap')!,{zoom:8,center:this.localition})
     const marker = new google.maps.Marker({position:this.localition, map:this.map, animation:google.maps.Animation.BOUNCE})
     const service = new google.maps.places.PlacesService(this.map)
   }
